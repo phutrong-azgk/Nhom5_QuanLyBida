@@ -44,7 +44,6 @@ namespace Nhom5_QuanLyBida
             {
                 this.Hide();
                 MainForm mf = new MainForm();
-                mf.FormClosing += (s, args) => this.Close();
                 mf.FormClosed += (s, args) => {
                     if (mf.IsLoggingOut)
                     {

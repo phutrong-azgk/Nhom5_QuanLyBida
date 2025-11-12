@@ -90,7 +90,22 @@ namespace Nhom5_QuanLyBida
         {
             get { return isLoggingOut; }
         }
-        
+
+        private void btnBan_EnabledChanged(object sender, EventArgs e)
+        {
+            Button currentButton = (Button)sender;
+            if (currentButton.Enabled == false)
+            {
+                currentButton.BackColor = Color.LightGray; // Custom disabled background color
+                currentButton.ForeColor = Color.DarkOrchid; // Custom disabled text color
+            }
+            else
+            {
+                // Restore original colors when enabled
+                currentButton.BackColor = SystemColors.Control;
+                currentButton.ForeColor = SystemColors.ControlText;
+            }
+        }
     }
 
 
