@@ -23,6 +23,13 @@ namespace Nhom5_QuanLyBida
 
         }
 
+        private void ShowScreen(UserControl screen)
+        {
+            PanelMain.Controls.Clear();
+            screen.Dock = DockStyle.Fill;
+            PanelMain.Controls.Add(screen);
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             lblTenDN.Text = "Xin chào " + vaitro;
@@ -48,11 +55,8 @@ namespace Nhom5_QuanLyBida
                 btnGoiMon.Enabled = false;
                 btnBan.Enabled = false;
             }
+            ShowScreen(new UserControl_Ban());
         }
-
-        
-    
-
         private void btnDangXuat_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
@@ -82,7 +86,7 @@ namespace Nhom5_QuanLyBida
 
                 if (result == DialogResult.No)
                 {
-                    e.Cancel = true;  // Cancel the close operation
+                    e.Cancel = true;
                 }
             }
         }
@@ -96,15 +100,19 @@ namespace Nhom5_QuanLyBida
             Button currentButton = (Button)sender;
             if (currentButton.Enabled == false)
             {
-                currentButton.BackColor = Color.LightGray; // Custom disabled background color
-                currentButton.ForeColor = Color.DarkOrchid; // Custom disabled text color
+                currentButton.BackColor = Color.LightGray; 
+                currentButton.ForeColor = Color.DarkOrchid; 
             }
             else
             {
-                // Restore original colors when enabled
                 currentButton.BackColor = SystemColors.Control;
                 currentButton.ForeColor = SystemColors.ControlText;
             }
+        }
+
+        private void btnBan_Click(object sender, EventArgs e)
+        {
+            ShowScreen(new UserControl_Ban());
         }
     }
 
