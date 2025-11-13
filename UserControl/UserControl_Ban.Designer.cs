@@ -43,6 +43,7 @@
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.lblThoiGian = new System.Windows.Forms.Label();
             this.lblNgay = new System.Windows.Forms.Label();
+            this.flowLayoutPanelBan = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -210,6 +211,7 @@
             this.tableLayoutPanel5.ColumnCount = 1;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel6, 0, 1);
+            this.tableLayoutPanel5.Controls.Add(this.flowLayoutPanelBan, 0, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(4, 98);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
@@ -259,6 +261,14 @@
             this.lblNgay.Text = "Date";
             this.lblNgay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // flowLayoutPanelBan
+            // 
+            this.flowLayoutPanelBan.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelBan.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanelBan.Name = "flowLayoutPanelBan";
+            this.flowLayoutPanelBan.Size = new System.Drawing.Size(1047, 423);
+            this.flowLayoutPanelBan.TabIndex = 1;
+            // 
             // UserControl_Ban
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -296,5 +306,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.Label lblThoiGian;
         private System.Windows.Forms.Label lblNgay;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelBan;
     }
 }
