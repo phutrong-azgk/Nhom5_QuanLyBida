@@ -56,6 +56,7 @@ namespace Nhom5_QuanLyBida
                 btnBan.Enabled = false;
             }
             ShowScreen(new UserControl_Ban());
+            
         }
         private void btnDangXuat_Click(object sender, EventArgs e)
         {

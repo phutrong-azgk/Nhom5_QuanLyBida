@@ -67,10 +67,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserControl_Ban.cs">
+    <Compile Include="UserControl\UserControl_Ban.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControl_Ban.Designer.cs">
+    <Compile Include="UserControl\UserControl_Ban.Designer.cs">
       <DependentUpon>UserControl_Ban.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="OtherForms\DangKy.resx">
@@ -91,7 +91,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UserControl_Ban.resx">
+    <EmbeddedResource Include="UserControl\UserControl_Ban.resx">
       <DependentUpon>UserControl_Ban.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
