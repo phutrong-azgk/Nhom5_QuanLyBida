@@ -108,6 +108,7 @@
             this.btnGoiMon.Text = "Gọi món";
             this.btnGoiMon.UseVisualStyleBackColor = true;
             this.btnGoiMon.EnabledChanged += new System.EventHandler(this.btnBan_EnabledChanged);
+            this.btnGoiMon.Click += new System.EventHandler(this.btnGoiMon_Click);
             // 
             // btnKho
             // 

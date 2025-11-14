@@ -115,6 +115,11 @@ namespace Nhom5_QuanLyBida
         {
             ShowScreen(new UserControl_Ban());
         }
+
+        private void btnGoiMon_Click(object sender, EventArgs e)
+        {
+            ShowScreen(new UserControl_GoiMon());
+        }
     }
 
 

@@ -14,6 +14,9 @@ namespace Nhom5_QuanLyBida
     public partial class UserControl_Ban : UserControl
     {
         DataSet ds;
+        private Panel currentlySelectedTable = null; // Track selected table
+        private Color previousColor; // Store original color
+
         public UserControl_Ban()
         {
             InitializeComponent();
@@ -25,8 +28,12 @@ namespace Nhom5_QuanLyBida
             tableBox.Size = new Size(170, 170);
             tableBox.BorderStyle = BorderStyle.FixedSingle;
             tableBox.Margin = new Padding(10);
-            tableBox.BackColor = Color.LightGreen;
+            tableBox.Tag = new { Name = tableName, Status = status }; // Store data
             tableBox.Cursor = Cursors.Hand;
+
+            // Set color based on status
+            Color originalColor = GetColorByStatus(status);
+            tableBox.BackColor = originalColor;
 
             Label lblTableName = new Label();
             lblTableName.Text = tableName;
@@ -43,7 +50,7 @@ namespace Nhom5_QuanLyBida
             lblStatus.AutoSize = true;
 
             Label lblPrice = new Label();
-            lblPrice.Text = price;
+            lblPrice.Text = price + " / 1h";
             lblPrice.Font = new Font("Arial", 14);
             lblPrice.TextAlign = ContentAlignment.MiddleCenter;
             lblPrice.Location = new Point(10, 100);
@@ -53,10 +60,54 @@ namespace Nhom5_QuanLyBida
             tableBox.Controls.Add(lblStatus);
             tableBox.Controls.Add(lblPrice);
 
+            // Updated click event
+            tableBox.Click += TableBox_Click;
 
-            // Add to FlowLayoutPanel instead
+            // Make labels clickable too
+            lblTableName.Click += (s, e) => TableBox_Click(tableBox, e);
+            lblStatus.Click += (s, e) => TableBox_Click(tableBox, e);
+            lblPrice.Click += (s, e) => TableBox_Click(tableBox, e);
+
             flowLayoutPanelBan.Controls.Add(tableBox);
         }
+
+        private Color GetColorByStatus(string status)
+        {
+            if (status == "Trống")
+            {
+                return Color.LightGreen;
+            }
+            else if (status == "Đang Chơi")
+            {
+                return Color.LightCoral;
+            }
+            else
+            {
+                return Color.LightGoldenrodYellow;
+            }
+        }
+
+        private void TableBox_Click(object sender, EventArgs e)
+        {
+            Panel clickedTable = sender as Panel;
+            if (clickedTable == null) return;
+
+            // Reset previous selection
+            if (currentlySelectedTable != null && currentlySelectedTable != clickedTable)
+            {
+                // Restore original color based on status
+                var data = currentlySelectedTable.Tag as dynamic;
+                if (data != null)
+                {
+                    currentlySelectedTable.BackColor = GetColorByStatus(data.Status);
+                }
+            }
+
+            // Set new selection
+            currentlySelectedTable = clickedTable;
+            clickedTable.BackColor = Color.SlateBlue;
+        }
+
         private void LoadTablesFromDatabase()
         {
             try
@@ -64,25 +115,20 @@ namespace Nhom5_QuanLyBida
                 using (SqlConnection conn = DatabaseHelper.GetConnection())
                 {
                     conn.Open();
-                    string sql = "INSERT INTO TaiKhoan (TenDangNhap, MatKhau, VaiTro) VALUES (@tenDN, @matkhau, @vaitro)";
-                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    string query = "SELECT * FROM Ban";
+                    SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                    ds = new DataSet();
+
+                    adapter.Fill(ds, "Ban");
+
+                    // Loop through DataSet
+                    foreach (DataRow row in ds.Tables["Ban"].Rows)
                     {
-                        string query = "SELECT * FROM Ban";
-                        SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
-                        ds = new DataSet();
+                        string tableName = row["TenBan"].ToString();
+                        string status = row["TrangThai"].ToString();
+                        string price = row["Gia"].ToString();
 
-                        adapter.Fill(ds, "Ban");
-
-                        // Loop through DataSet
-                        foreach (DataRow row in ds.Tables["Ban"].Rows)
-                        {
-                            string tableName = row["TenBan"].ToString();
-                            string status = row["TrangThai"].ToString();
-                            string price = row["Gia"].ToString();
-
-
-                            AddTable(tableName, status, price);
-                        }
+                        AddTable(tableName, status, price);
                     }
                 }
             }
@@ -117,17 +163,29 @@ namespace Nhom5_QuanLyBida
 
         private void btnBatGio_Click(object sender, EventArgs e)
         {
-            btnTinhTien.Enabled=true;
-            btnBatGio.Enabled=false;
+            if (currentlySelectedTable == null)
+            {
+                MessageBox.Show("Vui lòng chọn bàn trước!");
+                return;
+            }
 
+            btnTinhTien.Enabled = true;
+            btnBatGio.Enabled = false;
         }
 
         private void btnTinhTien_Click(object sender, EventArgs e)
         {
-            btnBatGio.Enabled =true;
+            if (currentlySelectedTable == null)
+            {
+                MessageBox.Show("Vui lòng chọn bàn trước!");
+                return;
+            }
+
+            btnBatGio.Enabled = true;
             btnBatGio.BackColor = Color.LightGreen;
             btnBatGio.Focus();
-            btnTinhTien.Enabled=false;
+            btnTinhTien.Enabled = false;
+
         }
     }
 }
