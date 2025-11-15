@@ -30,21 +30,21 @@
         {
             this.tlpGoiMon = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.lblTongTien = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.label3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panelChonBan = new System.Windows.Forms.Panel();
-            this.panelMonDaGoi = new System.Windows.Forms.Panel();
-            this.panelChonMon = new System.Windows.Forms.Panel();
             this.tlpChonBan = new System.Windows.Forms.TableLayoutPanel();
-            this.tlpMonDaChon = new System.Windows.Forms.TableLayoutPanel();
-            this.tlpChonMon = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
+            this.panelMonDaGoi = new System.Windows.Forms.Panel();
+            this.tlpMonDaChon = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
+            this.panelChonMon = new System.Windows.Forms.Panel();
+            this.tlpChonMon = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
             this.cmbMon = new System.Windows.Forms.ComboBox();
@@ -54,10 +54,10 @@
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.panelChonBan.SuspendLayout();
-            this.panelMonDaGoi.SuspendLayout();
-            this.panelChonMon.SuspendLayout();
             this.tlpChonBan.SuspendLayout();
+            this.panelMonDaGoi.SuspendLayout();
             this.tlpMonDaChon.SuspendLayout();
+            this.panelChonMon.SuspendLayout();
             this.tlpChonMon.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
@@ -96,6 +96,19 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1214, 92);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label3.Font = new System.Drawing.Font("Bahnschrift", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(912, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(299, 92);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "VNĐ";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -130,7 +143,7 @@
             this.label2.Font = new System.Drawing.Font("Bahnschrift", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(413, 86);
+            this.label2.Size = new System.Drawing.Size(412, 86);
             this.label2.TabIndex = 0;
             this.label2.Text = "Tổng tiền:   ";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -141,9 +154,9 @@
             this.lblTongTien.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblTongTien.Font = new System.Drawing.Font("Bahnschrift", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTongTien.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.lblTongTien.Location = new System.Drawing.Point(422, 0);
+            this.lblTongTien.Location = new System.Drawing.Point(421, 0);
             this.lblTongTien.Name = "lblTongTien";
-            this.lblTongTien.Size = new System.Drawing.Size(206, 86);
+            this.lblTongTien.Size = new System.Drawing.Size(207, 86);
             this.lblTongTien.TabIndex = 0;
             this.lblTongTien.Text = "TongTien";
             this.lblTongTien.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -162,19 +175,6 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(1214, 525);
             this.tableLayoutPanel3.TabIndex = 1;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Font = new System.Drawing.Font("Bahnschrift", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(912, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(299, 92);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "VNĐ";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel4
             // 
@@ -197,26 +197,8 @@
             this.panelChonBan.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelChonBan.Location = new System.Drawing.Point(3, 3);
             this.panelChonBan.Name = "panelChonBan";
-            this.panelChonBan.Size = new System.Drawing.Size(578, 168);
+            this.panelChonBan.Size = new System.Drawing.Size(578, 167);
             this.panelChonBan.TabIndex = 0;
-            // 
-            // panelMonDaGoi
-            // 
-            this.panelMonDaGoi.Controls.Add(this.tlpMonDaChon);
-            this.panelMonDaGoi.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMonDaGoi.Location = new System.Drawing.Point(3, 177);
-            this.panelMonDaGoi.Name = "panelMonDaGoi";
-            this.panelMonDaGoi.Size = new System.Drawing.Size(578, 339);
-            this.panelMonDaGoi.TabIndex = 1;
-            // 
-            // panelChonMon
-            // 
-            this.panelChonMon.Controls.Add(this.tlpChonMon);
-            this.panelChonMon.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelChonMon.Location = new System.Drawing.Point(593, 3);
-            this.panelChonMon.Name = "panelChonMon";
-            this.panelChonMon.Size = new System.Drawing.Size(618, 519);
-            this.panelChonMon.TabIndex = 1;
             // 
             // tlpChonBan
             // 
@@ -231,8 +213,29 @@
             this.tlpChonBan.RowCount = 2;
             this.tlpChonBan.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.23809F));
             this.tlpChonBan.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 79.7619F));
-            this.tlpChonBan.Size = new System.Drawing.Size(578, 168);
+            this.tlpChonBan.Size = new System.Drawing.Size(578, 167);
             this.tlpChonBan.TabIndex = 0;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label4.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(6, 3);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(566, 31);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Chọn bàn";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panelMonDaGoi
+            // 
+            this.panelMonDaGoi.Controls.Add(this.tlpMonDaChon);
+            this.panelMonDaGoi.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMonDaGoi.Location = new System.Drawing.Point(3, 176);
+            this.panelMonDaGoi.Name = "panelMonDaGoi";
+            this.panelMonDaGoi.Size = new System.Drawing.Size(578, 340);
+            this.panelMonDaGoi.TabIndex = 1;
             // 
             // tlpMonDaChon
             // 
@@ -247,8 +250,29 @@
             this.tlpMonDaChon.RowCount = 2;
             this.tlpMonDaChon.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.79941F));
             this.tlpMonDaChon.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 88.20059F));
-            this.tlpMonDaChon.Size = new System.Drawing.Size(578, 339);
+            this.tlpMonDaChon.Size = new System.Drawing.Size(578, 340);
             this.tlpMonDaChon.TabIndex = 0;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label5.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(6, 3);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(566, 39);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Món đã chọn";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panelChonMon
+            // 
+            this.panelChonMon.Controls.Add(this.tlpChonMon);
+            this.panelChonMon.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelChonMon.Location = new System.Drawing.Point(593, 3);
+            this.panelChonMon.Name = "panelChonMon";
+            this.panelChonMon.Size = new System.Drawing.Size(618, 519);
+            this.panelChonMon.TabIndex = 1;
             // 
             // tlpChonMon
             // 
@@ -265,30 +289,6 @@
             this.tlpChonMon.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.36609F));
             this.tlpChonMon.Size = new System.Drawing.Size(618, 519);
             this.tlpChonMon.TabIndex = 0;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(6, 3);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(566, 32);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Chọn bàn";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(6, 3);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(566, 38);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Món đã chọn";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel5
             // 
@@ -343,12 +343,12 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.panelChonBan.ResumeLayout(false);
-            this.panelMonDaGoi.ResumeLayout(false);
-            this.panelChonMon.ResumeLayout(false);
             this.tlpChonBan.ResumeLayout(false);
             this.tlpChonBan.PerformLayout();
+            this.panelMonDaGoi.ResumeLayout(false);
             this.tlpMonDaChon.ResumeLayout(false);
             this.tlpMonDaChon.PerformLayout();
+            this.panelChonMon.ResumeLayout(false);
             this.tlpChonMon.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
