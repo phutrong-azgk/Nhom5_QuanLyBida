@@ -12,7 +12,6 @@ using Nhom5_QuanLyBida.Forms;
 
 namespace Nhom5_QuanLyBida
 {
-    
     public partial class MainForm : Form
     {
         public string vaitro = DangNhap.vaitro;

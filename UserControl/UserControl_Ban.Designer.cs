@@ -32,10 +32,10 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnThem = new System.Windows.Forms.Button();
+            this.btnXoa = new System.Windows.Forms.Button();
+            this.btnDatTruoc = new System.Windows.Forms.Button();
+            this.btnSua = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.btnBatGio = new System.Windows.Forms.Button();
             this.btnTinhTien = new System.Windows.Forms.Button();
@@ -103,10 +103,10 @@
             this.tableLayoutPanel3.ColumnCount = 2;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Controls.Add(this.button1, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.button2, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.button3, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(this.button4, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.btnThem, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.btnXoa, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.btnDatTruoc, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.btnSua, 1, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(445, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -116,52 +116,56 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(776, 89);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
-            // button1
+            // btnThem
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Location = new System.Drawing.Point(100, 10);
-            this.button1.Margin = new System.Windows.Forms.Padding(100, 10, 50, 10);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(238, 24);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Thêm bàn";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnThem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.btnThem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnThem.Location = new System.Drawing.Point(100, 10);
+            this.btnThem.Margin = new System.Windows.Forms.Padding(100, 10, 50, 10);
+            this.btnThem.Name = "btnThem";
+            this.btnThem.Size = new System.Drawing.Size(238, 24);
+            this.btnThem.TabIndex = 0;
+            this.btnThem.Text = "Thêm bàn";
+            this.btnThem.UseVisualStyleBackColor = false;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click_1);
             // 
-            // button2
+            // btnXoa
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.Location = new System.Drawing.Point(100, 54);
-            this.button2.Margin = new System.Windows.Forms.Padding(100, 10, 50, 10);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(238, 25);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Xóa bàn";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnXoa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btnXoa.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnXoa.Location = new System.Drawing.Point(100, 54);
+            this.btnXoa.Margin = new System.Windows.Forms.Padding(100, 10, 50, 10);
+            this.btnXoa.Name = "btnXoa";
+            this.btnXoa.Size = new System.Drawing.Size(238, 25);
+            this.btnXoa.TabIndex = 0;
+            this.btnXoa.Text = "Xóa bàn";
+            this.btnXoa.UseVisualStyleBackColor = false;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click_1);
             // 
-            // button3
+            // btnDatTruoc
             // 
-            this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button3.Location = new System.Drawing.Point(488, 54);
-            this.button3.Margin = new System.Windows.Forms.Padding(100, 10, 50, 10);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(238, 25);
-            this.button3.TabIndex = 0;
-            this.button3.Text = "Đặt trước";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnDatTruoc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDatTruoc.Location = new System.Drawing.Point(488, 54);
+            this.btnDatTruoc.Margin = new System.Windows.Forms.Padding(100, 10, 50, 10);
+            this.btnDatTruoc.Name = "btnDatTruoc";
+            this.btnDatTruoc.Size = new System.Drawing.Size(238, 25);
+            this.btnDatTruoc.TabIndex = 0;
+            this.btnDatTruoc.Text = "Đặt trước";
+            this.btnDatTruoc.UseVisualStyleBackColor = true;
+            this.btnDatTruoc.Click += new System.EventHandler(this.btnDatTruoc_Click_1);
             // 
-            // button4
+            // btnSua
             // 
-            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.button4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button4.Location = new System.Drawing.Point(488, 10);
-            this.button4.Margin = new System.Windows.Forms.Padding(100, 10, 50, 10);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(238, 24);
-            this.button4.TabIndex = 0;
-            this.button4.Text = "Sửa bàn";
-            this.button4.UseVisualStyleBackColor = false;
+            this.btnSua.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnSua.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnSua.Location = new System.Drawing.Point(488, 10);
+            this.btnSua.Margin = new System.Windows.Forms.Padding(100, 10, 50, 10);
+            this.btnSua.Name = "btnSua";
+            this.btnSua.Size = new System.Drawing.Size(238, 24);
+            this.btnSua.TabIndex = 0;
+            this.btnSua.Text = "Sửa bàn";
+            this.btnSua.UseVisualStyleBackColor = false;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click_1);
             // 
             // tableLayoutPanel4
             // 
@@ -295,10 +299,10 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnThem;
+        private System.Windows.Forms.Button btnXoa;
+        private System.Windows.Forms.Button btnDatTruoc;
+        private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Button btnBatGio;
         private System.Windows.Forms.Button btnTinhTien;

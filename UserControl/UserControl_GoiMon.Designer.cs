@@ -335,6 +335,7 @@
             this.Controls.Add(this.tlpGoiMon);
             this.Name = "UserControl_GoiMon";
             this.Size = new System.Drawing.Size(1222, 632);
+            this.Load += new System.EventHandler(this.UserControl_GoiMon_Load);
             this.tlpGoiMon.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
