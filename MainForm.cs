@@ -119,6 +119,11 @@ namespace Nhom5_QuanLyBida
         {
             ShowScreen(new UserControl_GoiMon());
         }
+
+        private void btnBaoCao_Click(object sender, EventArgs e)
+        {
+            ShowScreen(new UserControl_BaoCao());
+        }
     }
 
 

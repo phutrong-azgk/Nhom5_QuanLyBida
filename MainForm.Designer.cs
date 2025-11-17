@@ -187,6 +187,7 @@
             this.btnBaoCao.Text = "Báo cáo";
             this.btnBaoCao.UseVisualStyleBackColor = true;
             this.btnBaoCao.EnabledChanged += new System.EventHandler(this.btnBan_EnabledChanged);
+            this.btnBaoCao.Click += new System.EventHandler(this.btnBaoCao_Click);
             // 
             // btnDangXuat
             // 

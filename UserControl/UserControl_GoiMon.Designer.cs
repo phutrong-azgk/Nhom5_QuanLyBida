@@ -320,6 +320,7 @@
             // cmbMon
             // 
             this.cmbMon.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbMon.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMon.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbMon.FormattingEnabled = true;
             this.cmbMon.Location = new System.Drawing.Point(353, 20);

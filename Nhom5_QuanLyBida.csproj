@@ -80,6 +80,12 @@
     <Compile Include="UserControl\UserControl_GoiMon.Designer.cs">
       <DependentUpon>UserControl_GoiMon.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\UserControl_BaoCao.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\UserControl_BaoCao.Designer.cs">
+      <DependentUpon>UserControl_BaoCao.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="OtherForms\DangKy.resx">
       <DependentUpon>DangKy.cs</DependentUpon>
     </EmbeddedResource>
@@ -103,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\UserControl_GoiMon.resx">
       <DependentUpon>UserControl_GoiMon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\UserControl_BaoCao.resx">
+      <DependentUpon>UserControl_BaoCao.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
