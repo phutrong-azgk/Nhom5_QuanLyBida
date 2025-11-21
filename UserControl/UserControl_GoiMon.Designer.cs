@@ -75,7 +75,6 @@
             this.tlpGoiMon.RowCount = 2;
             this.tlpGoiMon.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.68938F));
             this.tlpGoiMon.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 84.31062F));
-            this.tlpGoiMon.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpGoiMon.Size = new System.Drawing.Size(1222, 632);
             this.tlpGoiMon.TabIndex = 0;
             // 
@@ -145,7 +144,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(412, 86);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Tổng tiền:   ";
+            this.label2.Text = "Tổng:   ";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblTongTien

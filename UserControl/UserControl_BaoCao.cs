@@ -16,5 +16,16 @@ namespace Nhom5_QuanLyBida
         {
             InitializeComponent();
         }
+
+        
+
+        private void UserControl_BaoCao_Load(object sender, EventArgs e)
+        {
+            NgayBatDau.CustomFormat = "dd/MM/yyyy";
+            NgayKetThuc.CustomFormat = "dd/MM/yyyy";
+            
+        }
+
+        
     }
 }

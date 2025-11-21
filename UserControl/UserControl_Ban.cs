@@ -128,6 +128,7 @@ namespace Nhom5_QuanLyBida
             {
                 // Timer not running
                 btnBatGio.Enabled = true;
+                btnBatGio.BackColor = Color.LightGreen;
                 btnTinhTien.Enabled = false;
             }
         }
@@ -445,6 +446,7 @@ namespace Nhom5_QuanLyBida
 
                 btnTinhTien.Enabled = true;
                 btnBatGio.Enabled = false;
+                
 
                 LoadTablesFromDatabase();
                 TableStatusChanged?.Invoke(this, EventArgs.Empty);
