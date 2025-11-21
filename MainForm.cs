@@ -31,6 +31,9 @@ namespace Nhom5_QuanLyBida
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
+            if (DesignMode) return;
+
             lblTenDN.Text = "Xin chào " + vaitro;
             if (vaitro == "ADMIN")
             {
@@ -129,7 +132,7 @@ namespace Nhom5_QuanLyBida
 
     public static class DatabaseHelper//class để lết nối csdl
     {
-        private static string connstr = "Data Source=FUSHIGIRI;Initial Catalog=QuanLyBida;Integrated Security=True;TrustServerCertificate=True";
+        private static string connstr = "Data Source=.;Initial Catalog=QuanLyBida;Integrated Security=True;TrustServerCertificate=True";
 
         public static SqlConnection GetConnection()
         {
