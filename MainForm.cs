@@ -127,6 +127,16 @@ namespace Nhom5_QuanLyBida
         {
             ShowScreen(new UserControl_BaoCao());
         }
+
+        private void btnTaiKhoan_Click(object sender, EventArgs e)
+        {
+            ShowScreen(new UserControl_QuanLyTK());
+        }
+
+        private void btnKho_Click(object sender, EventArgs e)
+        {
+            ShowScreen(new UserControl_QLKho());
+        }
     }
 
 
