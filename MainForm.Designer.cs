@@ -122,6 +122,7 @@
             this.btnKho.Text = "Quản lý kho";
             this.btnKho.UseVisualStyleBackColor = true;
             this.btnKho.EnabledChanged += new System.EventHandler(this.btnBan_EnabledChanged);
+            this.btnKho.Click += new System.EventHandler(this.btnKho_Click);
             // 
             // btnTaiKhoan
             // 
@@ -135,6 +136,7 @@
             this.btnTaiKhoan.Text = "Quản lý tài khoản";
             this.btnTaiKhoan.UseVisualStyleBackColor = true;
             this.btnTaiKhoan.EnabledChanged += new System.EventHandler(this.btnBan_EnabledChanged);
+            this.btnTaiKhoan.Click += new System.EventHandler(this.btnTaiKhoan_Click);
             // 
             // btnNhanVien
             // 
