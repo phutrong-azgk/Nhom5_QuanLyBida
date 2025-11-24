@@ -203,6 +203,7 @@ namespace Nhom5_QuanLyBida
             LoadKho();
             LoadMenuMon();
 
+            dtNgayNhap.CustomFormat="dd/MM/yyyy";
             dgvKho.ReadOnly = true;
             dgvKho.AllowUserToAddRows = false;
 

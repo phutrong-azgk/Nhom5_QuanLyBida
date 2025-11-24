@@ -23,7 +23,8 @@ namespace Nhom5_QuanLyBida
         {
             NgayBatDau.CustomFormat = "dd/MM/yyyy";
             NgayKetThuc.CustomFormat = "dd/MM/yyyy";
-            
+            NgayBatDau.MaxDate = DateTime.Now;
+            NgayKetThuc.MaxDate = DateTime.Now;
         }
 
         

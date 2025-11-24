@@ -303,6 +303,7 @@
             // 
             // dtNgayNhap
             // 
+            this.dtNgayNhap.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtNgayNhap.Location = new System.Drawing.Point(192, 3);
             this.dtNgayNhap.Name = "dtNgayNhap";
             this.dtNgayNhap.Size = new System.Drawing.Size(183, 22);
