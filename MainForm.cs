@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Nhom5_QuanLyBida.Forms;
+using Nhom5_QuanLyBida.UserControl;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,7 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Nhom5_QuanLyBida.Forms;
 
 namespace Nhom5_QuanLyBida
 {
@@ -136,6 +137,14 @@ namespace Nhom5_QuanLyBida
         private void btnTaiKhoan_Click(object sender, EventArgs e)
         {
             ShowScreen(new UserControl_QuanLyTK());
+        }
+        private void btnNhanVien_Click(object sender, EventArgs e)
+        {
+            ShowScreen(new UserControl_NhanVien());
+        }
+        private void btnKhach_Click(object sender, EventArgs e)
+        {
+            ShowScreen(new UserControl_KhachHang());
         }
     }
 
