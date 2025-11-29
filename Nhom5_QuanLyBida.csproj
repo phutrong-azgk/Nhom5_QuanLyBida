@@ -48,6 +48,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\TableStateManager.cs" />
+    <Compile Include="FormKhach\SuaKhach.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormKhach\SuaKhach.Designer.cs">
+      <DependentUpon>SuaKhach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormKhach\ThemKhack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormKhach\ThemKhack.Designer.cs">
+      <DependentUpon>ThemKhack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormNhanVien\SuaNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNhanVien\SuaNhanVien.Designer.cs">
+      <DependentUpon>SuaNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormNhanVien\ThemNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNhanVien\ThemNhanVien.Designer.cs">
+      <DependentUpon>ThemNhanVien.cs</DependentUpon>
+    </Compile>
     <Compile Include="OtherForms\DangKy.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +110,18 @@
     <Compile Include="UserControl\UserControl_BaoCao.Designer.cs">
       <DependentUpon>UserControl_BaoCao.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\UserControl_Khach.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\UserControl_Khach.Designer.cs">
+      <DependentUpon>UserControl_Khach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\UserControl_NhanVien.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\UserControl_NhanVien.Designer.cs">
+      <DependentUpon>UserControl_NhanVien.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\UserControl_QLKho.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -98,6 +134,18 @@
     <Compile Include="UserControl\UserControl_QuanLyTK.Designer.cs">
       <DependentUpon>UserControl_QuanLyTK.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FormKhach\SuaKhach.resx">
+      <DependentUpon>SuaKhach.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormKhach\ThemKhack.resx">
+      <DependentUpon>ThemKhack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormNhanVien\SuaNhanVien.resx">
+      <DependentUpon>SuaNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormNhanVien\ThemNhanVien.resx">
+      <DependentUpon>ThemNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OtherForms\DangKy.resx">
       <DependentUpon>DangKy.cs</DependentUpon>
     </EmbeddedResource>
@@ -124,6 +172,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\UserControl_BaoCao.resx">
       <DependentUpon>UserControl_BaoCao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\UserControl_Khach.resx">
+      <DependentUpon>UserControl_Khach.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\UserControl_NhanVien.resx">
+      <DependentUpon>UserControl_NhanVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\UserControl_QLKho.resx">
       <DependentUpon>UserControl_QLKho.cs</DependentUpon>
