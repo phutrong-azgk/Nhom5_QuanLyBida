@@ -18,6 +18,7 @@ namespace Nhom5_QuanLyBida
         DataSet ds;
         private Panel currentlySelectedTable = null;
         private string selectedTableId = null;
+        private string currentMaHD = null; // Lưu mã hóa đơn hiện tại
 
         public UserControl_Ban()
         {
@@ -108,7 +109,7 @@ namespace Nhom5_QuanLyBida
             selectedTableId = clickedTable.Name;
             clickedTable.BackColor = Color.SlateBlue;
 
-            // Update button states based on saved state
+            // Update button states and get current invoice
             UpdateButtonStatesForSelectedTable();
         }
 
@@ -116,20 +117,59 @@ namespace Nhom5_QuanLyBida
         {
             if (selectedTableId == null) return;
 
-            var state = TableStateManager.GetTableState(selectedTableId);
+            // Kiểm tra xem bàn có hóa đơn đang hoạt động không
+            currentMaHD = GetActiveInvoiceForTable(selectedTableId);
 
-            if (state != null && state.IsTimerActive)
+            if (currentMaHD != null)
             {
-                // Timer is running
+                // Có hóa đơn đang hoạt động - bàn đang chơi
                 btnBatGio.Enabled = false;
                 btnTinhTien.Enabled = true;
             }
             else
             {
-                // Timer not running
-                btnBatGio.Enabled = true;
-                btnBatGio.BackColor = Color.LightGreen;
-                btnTinhTien.Enabled = false;
+                // Không có hóa đơn - bàn trống hoặc đặt trước
+                string status = currentlySelectedTable?.Tag?.ToString();
+                if (status == "Đang Chơi")
+                {
+                    // Trường hợp bàn "Đang Chơi" nhưng không có hóa đơn (dữ liệu không đồng bộ)
+                    btnBatGio.Enabled = false;
+                    btnTinhTien.Enabled = false;
+                }
+                else
+                {
+                    btnBatGio.Enabled = true;
+                    btnBatGio.BackColor = Color.LightGreen;
+                    btnTinhTien.Enabled = false;
+                }
+            }
+        }
+
+        private string GetActiveInvoiceForTable(string maBan)
+        {
+            try
+            {
+                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                {
+                    conn.Open();
+                    string query = @"SELECT TOP 1 MaHD 
+                                    FROM HoaDon 
+                                    WHERE MaBan = @MaBan 
+                                    AND GioKetThuc IS NULL 
+                                    ORDER BY GioBatDau DESC";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@MaBan", maBan);
+                        object result = cmd.ExecuteScalar();
+                        return result?.ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi kiểm tra hóa đơn: {ex.Message}");
+                return null;
             }
         }
 
@@ -340,11 +380,9 @@ namespace Nhom5_QuanLyBida
 
                             MessageBox.Show("Xóa bàn thành công!");
 
-                            // Clear state when deleting table
-                            TableStateManager.ClearTableState(maBan);
-
                             currentlySelectedTable = null;
                             selectedTableId = null;
+                            currentMaHD = null;
                             LoadTablesFromDatabase();
                         }
                     }
@@ -428,25 +466,43 @@ namespace Nhom5_QuanLyBida
 
             string maBan = selectedTableId;
 
+            // Hiển thị form chọn khách hàng (tùy chọn)
+            string maKhach = ShowCustomerSelectionForm();
+
             try
             {
                 using (SqlConnection conn = DatabaseHelper.GetConnection())
                 {
                     conn.Open();
-                    string query = "UPDATE Ban SET TrangThai = N'Đang Chơi' WHERE MaBan = @MaBan";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+
+                    // Lấy MaNV từ thông tin đăng nhập
+                    string maNV = GetEmployeeIdFromUsername();
+
+                    if (string.IsNullOrEmpty(maNV))
                     {
+                        MessageBox.Show("Không tìm thấy thông tin nhân viên!");
+                        return;
+                    }
+
+                    // Sử dụng stored procedure sp_BatGio
+                    using (SqlCommand cmd = new SqlCommand("sp_BatGio", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@MaBan", maBan);
+                        cmd.Parameters.AddWithValue("@MaNV", maNV);
+
+                        if (!string.IsNullOrEmpty(maKhach))
+                            cmd.Parameters.AddWithValue("@MaKhach", maKhach);
+                        else
+                            cmd.Parameters.AddWithValue("@MaKhach", DBNull.Value);
+
                         cmd.ExecuteNonQuery();
+                        MessageBox.Show("Bật giờ thành công!");
                     }
                 }
 
-                // Save state
-                TableStateManager.SetTableState(maBan, true, DateTime.Now);
-
                 btnTinhTien.Enabled = true;
                 btnBatGio.Enabled = false;
-                
 
                 LoadTablesFromDatabase();
                 TableStatusChanged?.Invoke(this, EventArgs.Empty);
@@ -455,6 +511,236 @@ namespace Nhom5_QuanLyBida
             {
                 MessageBox.Show($"Lỗi: {ex.Message}");
             }
+        }
+
+        private string GetEmployeeIdFromUsername()
+        {
+            try
+            {
+                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                {
+                    conn.Open();
+                    string query = @"SELECT nv.MaNV 
+                                    FROM NhanVien nv 
+                                    INNER JOIN TaiKhoan tk ON nv.TenDangNhap = tk.TenDangNhap 
+                                    WHERE tk.VaiTro = @VaiTro";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@VaiTro", DangNhap.vaitro);
+                        object result = cmd.ExecuteScalar();
+                        return result?.ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi lấy thông tin nhân viên: {ex.Message}");
+                return null;
+            }
+        }
+
+        private string ShowCustomerSelectionForm()
+        {
+            Form customerForm = new Form();
+            customerForm.Text = "Chọn khách hàng";
+            customerForm.Size = new Size(500, 400);
+            customerForm.StartPosition = FormStartPosition.CenterParent;
+
+            Label lblTitle = new Label()
+            {
+                Text = "Chọn khách hàng (tùy chọn)",
+                Location = new Point(20, 20),
+                Font = new Font("Arial", 12, FontStyle.Bold),
+                AutoSize = true
+            };
+
+            ComboBox cmbCustomer = new ComboBox()
+            {
+                Location = new Point(20, 60),
+                Width = 440,
+                DropDownStyle = ComboBoxStyle.DropDownList
+            };
+
+            // Load danh sách khách hàng
+            try
+            {
+                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                {
+                    conn.Open();
+                    string query = "SELECT MaKhach, TenKhach FROM Khach ORDER BY TenKhach";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        SqlDataReader reader = cmd.ExecuteReader();
+
+                        // Thêm option "Không chọn"
+                        cmbCustomer.Items.Add(new { MaKhach = "", TenKhach = "-- Không chọn khách --" });
+
+                        while (reader.Read())
+                        {
+                            cmbCustomer.Items.Add(new
+                            {
+                                MaKhach = reader["MaKhach"].ToString(),
+                                TenKhach = reader["TenKhach"].ToString()
+                            });
+                        }
+                    }
+                }
+
+                cmbCustomer.DisplayMember = "TenKhach";
+                cmbCustomer.ValueMember = "MaKhach";
+                cmbCustomer.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải danh sách khách: {ex.Message}");
+            }
+
+            // Button thêm khách hàng mới
+            Button btnAddNew = new Button()
+            {
+                Text = "Thêm khách mới",
+                Location = new Point(20, 100),
+                Width = 150,
+                Height = 35
+            };
+
+            btnAddNew.Click += (s, ev) =>
+            {
+                string newCustomerId = ShowAddCustomerForm();
+                if (!string.IsNullOrEmpty(newCustomerId))
+                {
+                    // Reload customer list
+                    cmbCustomer.Items.Clear();
+                    try
+                    {
+                        using (SqlConnection conn = DatabaseHelper.GetConnection())
+                        {
+                            conn.Open();
+                            string query = "SELECT MaKhach, TenKhach FROM Khach ORDER BY TenKhach";
+                            using (SqlCommand cmd = new SqlCommand(query, conn))
+                            {
+                                SqlDataReader reader = cmd.ExecuteReader();
+
+                                cmbCustomer.Items.Add(new { MaKhach = "", TenKhach = "-- Không chọn khách --" });
+
+                                while (reader.Read())
+                                {
+                                    var item = new
+                                    {
+                                        MaKhach = reader["MaKhach"].ToString(),
+                                        TenKhach = reader["TenKhach"].ToString()
+                                    };
+
+                                    cmbCustomer.Items.Add(item);
+
+                                    // Select the newly added customer
+                                    if (item.MaKhach == newCustomerId)
+                                    {
+                                        cmbCustomer.SelectedItem = item;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Lỗi khi tải lại danh sách: {ex.Message}");
+                    }
+                }
+            };
+
+            Button btnOK = new Button()
+            {
+                Text = "Xác nhận",
+                Location = new Point(250, 300),
+                Width = 100,
+                Height = 35,
+                DialogResult = DialogResult.OK
+            };
+
+            Button btnCancel = new Button()
+            {
+                Text = "Bỏ qua",
+                Location = new Point(360, 300),
+                Width = 100,
+                Height = 35,
+                DialogResult = DialogResult.Cancel
+            };
+
+            customerForm.Controls.AddRange(new Control[] { lblTitle, cmbCustomer, btnAddNew, btnOK, btnCancel });
+            customerForm.AcceptButton = btnOK;
+            customerForm.CancelButton = btnCancel;
+
+            string selectedCustomer = null;
+            if (customerForm.ShowDialog() == DialogResult.OK)
+            {
+                if (cmbCustomer.SelectedItem != null)
+                {
+                    dynamic selected = cmbCustomer.SelectedItem;
+                    selectedCustomer = selected.MaKhach;
+                }
+            }
+
+            return selectedCustomer;
+        }
+
+        private string ShowAddCustomerForm()
+        {
+            Form addForm = new Form();
+            addForm.Text = "Thêm khách hàng mới";
+            addForm.Size = new Size(400, 250);
+            addForm.StartPosition = FormStartPosition.CenterParent;
+
+            Label lblMaKhach = new Label() { Text = "Mã khách:", Location = new Point(20, 20), AutoSize = true };
+            TextBox txtMaKhach = new TextBox() { Location = new Point(120, 20), Width = 240 };
+
+            Label lblTenKhach = new Label() { Text = "Tên khách:", Location = new Point(20, 60), AutoSize = true };
+            TextBox txtTenKhach = new TextBox() { Location = new Point(120, 60), Width = 240 };
+
+            Button btnSave = new Button() { Text = "Lưu", Location = new Point(160, 150), Width = 80 };
+            Button btnCancel = new Button() { Text = "Hủy", Location = new Point(260, 150), Width = 80 };
+
+            string newCustomerId = null;
+
+            btnSave.Click += (s, ev) =>
+            {
+                if (string.IsNullOrWhiteSpace(txtMaKhach.Text) || string.IsNullOrWhiteSpace(txtTenKhach.Text))
+                {
+                    MessageBox.Show("Vui lòng điền đầy đủ thông tin!");
+                    return;
+                }
+
+                try
+                {
+                    using (SqlConnection conn = DatabaseHelper.GetConnection())
+                    {
+                        conn.Open();
+                        string query = "INSERT INTO Khach (MaKhach, TenKhach, SoHoaDon, TongChi) VALUES (@MaKhach, @TenKhach, 0, 0)";
+                        using (SqlCommand cmd = new SqlCommand(query, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@MaKhach", txtMaKhach.Text.Trim());
+                            cmd.Parameters.AddWithValue("@TenKhach", txtTenKhach.Text.Trim());
+
+                            cmd.ExecuteNonQuery();
+                            newCustomerId = txtMaKhach.Text.Trim();
+                            MessageBox.Show("Thêm khách hàng thành công!");
+                            addForm.Close();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Lỗi: {ex.Message}");
+                }
+            };
+
+            btnCancel.Click += (s, ev) => addForm.Close();
+
+            addForm.Controls.AddRange(new Control[] { lblMaKhach, txtMaKhach, lblTenKhach, txtTenKhach, btnSave, btnCancel });
+            addForm.ShowDialog();
+
+            return newCustomerId;
         }
 
         private void btnTinhTien_Click(object sender, EventArgs e)
@@ -467,33 +753,71 @@ namespace Nhom5_QuanLyBida
 
             string maBan = selectedTableId;
 
+            // Lấy hóa đơn hiện tại của bàn
+            string maHD = GetActiveInvoiceForTable(maBan);
+
+            if (maHD == null)
+            {
+                MessageBox.Show("Không tìm thấy hóa đơn cho bàn này!");
+                return;
+            }
+
             try
             {
                 using (SqlConnection conn = DatabaseHelper.GetConnection())
                 {
                     conn.Open();
-                    string query = "UPDATE Ban SET TrangThai = N'Trống' WHERE MaBan = @MaBan";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+
+                    // Sử dụng stored procedure sp_TinhTienHoaDon
+                    using (SqlCommand cmd = new SqlCommand("sp_TinhTienHoaDon", conn))
                     {
-                        cmd.Parameters.AddWithValue("@MaBan", maBan);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@MaHD", maHD);
+
                         cmd.ExecuteNonQuery();
+                    }
+
+                    // Lấy tổng tiền để hiển thị
+                    string queryTotal = "SELECT TongTien FROM HoaDon WHERE MaHD = @MaHD";
+                    using (SqlCommand cmdTotal = new SqlCommand(queryTotal, conn))
+                    {
+                        cmdTotal.Parameters.AddWithValue("@MaHD", maHD);
+                        object result = cmdTotal.ExecuteScalar();
+
+                        if (result != null && result != DBNull.Value)
+                        {
+                            decimal tongTien = Convert.ToDecimal(result);
+                            MessageBox.Show($"Tính tiền thành công!\n\nMã hóa đơn: {maHD}\nTổng tiền: {tongTien:N0} VNĐ",
+                                "Thanh toán", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Tính tiền thành công!\n\nMã hóa đơn: {maHD}\nTổng tiền: 0 VNĐ",
+                                "Thanh toán", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+
+                    // Cập nhật trạng thái bàn về Trống
+                    string queryUpdateTable = "UPDATE Ban SET TrangThai = N'Trống' WHERE MaBan = @MaBan";
+                    using (SqlCommand cmdUpdate = new SqlCommand(queryUpdateTable, conn))
+                    {
+                        cmdUpdate.Parameters.AddWithValue("@MaBan", maBan);
+                        cmdUpdate.ExecuteNonQuery();
                     }
                 }
 
-                // Clear state when payment is done
-                TableStateManager.ClearTableState(maBan);
+                // Clear selection
+                currentMaHD = null;
+                currentlySelectedTable = null;
+                selectedTableId = null;
 
-                btnBatGio.Enabled = true;
-                btnBatGio.BackColor = Color.LightGreen;
-                btnBatGio.Focus();
-                btnTinhTien.Enabled = false;
-
+                // Reload tables
                 LoadTablesFromDatabase();
                 TableStatusChanged?.Invoke(this, EventArgs.Empty);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi: {ex.Message}");
+                MessageBox.Show($"Lỗi: {ex.Message}\n\nStack Trace: {ex.StackTrace}");
             }
         }
     }
