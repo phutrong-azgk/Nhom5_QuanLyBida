@@ -137,6 +137,15 @@ namespace Nhom5_QuanLyBida
         {
             ShowScreen(new UserControl_QuanLyTK());
         }
+	private void btnKhach_Click(object sender, EventArgs e)
+	{
+    	    ShowScreen(new UserControl_Khach());
+	}
+
+	private void btnNhanVien_Click(object sender, EventArgs e)
+	{
+            ShowScreen(new UserControl_NhanVien());
+	}
     }
 
 
