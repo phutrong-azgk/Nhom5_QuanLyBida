@@ -16,7 +16,7 @@ namespace Nhom5_QuanLyBida
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DangNhap());
+            Application.Run(new MainForm());
         }
     }
 }
