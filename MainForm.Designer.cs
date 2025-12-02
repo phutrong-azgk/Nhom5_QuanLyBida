@@ -150,6 +150,7 @@
             this.btnNhanVien.Text = "Quản lý nhân viên";
             this.btnNhanVien.UseVisualStyleBackColor = true;
             this.btnNhanVien.EnabledChanged += new System.EventHandler(this.btnBan_EnabledChanged);
+            this.btnNhanVien.Click += new System.EventHandler(this.btnNhanVien_Click);
             // 
             // btnKhach
             // 
@@ -163,6 +164,7 @@
             this.btnKhach.Text = "Quản lý khách";
             this.btnKhach.UseVisualStyleBackColor = true;
             this.btnKhach.EnabledChanged += new System.EventHandler(this.btnBan_EnabledChanged);
+            this.btnKhach.Click += new System.EventHandler(this.btnKhach_Click);
             // 
             // btnKhuyenMai
             // 
