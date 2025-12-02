@@ -14,6 +14,7 @@ namespace Nhom5_QuanLyBida
     public partial class UserControl_GoiMon : UserControl
     {
         private string selectedMaBan = null;
+        private string currentMaHD = null;
         private Dictionary<string, OrderItem> orderedItems = new Dictionary<string, OrderItem>();
 
         public class OrderItem
@@ -40,7 +41,6 @@ namespace Nhom5_QuanLyBida
             UpdateTotalMoney();
         }
 
-        // Load categories into combobox
         private void LoadComboBoxCategories()
         {
             cmbMon.Items.Clear();
@@ -55,12 +55,10 @@ namespace Nhom5_QuanLyBida
             LoadMenuItems(category);
         }
 
-        // Load active tables into panelChonBan
         private void LoadAvailableTables()
         {
             try
             {
-                // Clear previous controls except the label
                 for (int i = tlpChonBan.Controls.Count - 1; i >= 0; i--)
                 {
                     if (tlpChonBan.Controls[i] != label4)
@@ -79,12 +77,10 @@ namespace Nhom5_QuanLyBida
 
                         if (!reader.HasRows)
                         {
-                            // No active tables
                             ShowNoTablesMessage();
                         }
                         else
                         {
-                            // Remove "no tables" message if exists
                             tlpChonBan.RowCount = 2;
 
                             FlowLayoutPanel flowTables = new FlowLayoutPanel();
@@ -142,14 +138,105 @@ namespace Nhom5_QuanLyBida
                 }
             }
             btn.BackColor = Color.LightBlue;
+
+            // Lấy hóa đơn hiện tại của bàn
+            currentMaHD = GetActiveInvoiceForTable(selectedMaBan);
+
+            if (currentMaHD == null)
+            {
+                MessageBox.Show("Bàn này chưa có hóa đơn. Vui lòng bật giờ ở màn hình quản lý bàn trước!");
+                selectedMaBan = null;
+                btn.BackColor = Color.LightGreen;
+                return;
+            }
+
+            // Load món đã gọi của hóa đơn này
+            LoadExistingOrders(currentMaHD);
         }
 
-        // Load menu items based on category
+        private string GetActiveInvoiceForTable(string maBan)
+        {
+            try
+            {
+                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                {
+                    conn.Open();
+                    string query = @"SELECT TOP 1 MaHD 
+                                    FROM HoaDon 
+                                    WHERE MaBan = @MaBan 
+                                    AND GioKetThuc IS NULL 
+                                    ORDER BY GioBatDau DESC";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@MaBan", maBan);
+                        object result = cmd.ExecuteScalar();
+                        return result?.ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi kiểm tra hóa đơn: {ex.Message}");
+                return null;
+            }
+        }
+
+        private void LoadExistingOrders(string maHD)
+        {
+            try
+            {
+                orderedItems.Clear();
+
+                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                {
+                    conn.Open();
+                    string query = @"SELECT ct.MaMon, m.TenMon, m.DonGia, ct.SoLuong
+                                    FROM ChiTietHoaDon ct
+                                    INNER JOIN Mon m ON ct.MaMon = m.MaMon
+                                    WHERE ct.MaHD = @MaHD";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@MaHD", maHD);
+                        SqlDataReader reader = cmd.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            string maMon = reader["MaMon"].ToString();
+                            orderedItems[maMon] = new OrderItem
+                            {
+                                MaMon = maMon,
+                                TenMon = reader["TenMon"].ToString(),
+                                DonGia = Convert.ToInt32(reader["DonGia"]),
+                                SoLuong = Convert.ToInt32(reader["SoLuong"])
+                            };
+                        }
+                    }
+                }
+
+                if (orderedItems.Count > 0)
+                {
+                    tlpMonDaChon.Visible = true;
+                    UpdateOrderList();
+                }
+                else
+                {
+                    tlpMonDaChon.Visible = false;
+                }
+
+                UpdateTotalMoney();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải món đã gọi: {ex.Message}");
+            }
+        }
+
         private void LoadMenuItems(string category)
         {
             try
             {
-                // Clear previous items except header
                 for (int i = tlpChonMon.Controls.Count - 1; i >= 0; i--)
                 {
                     if (tlpChonMon.Controls[i] != tableLayoutPanel5)
@@ -169,7 +256,6 @@ namespace Nhom5_QuanLyBida
                     conn.Open();
                     string query = "SELECT MaMon, TenMon, DonGia FROM Mon WHERE SoLuongTon > 0";
 
-                    // Filter by category
                     if (category == "Đồ uống")
                         query += " AND MaMon LIKE 'U%'";
                     else if (category == "Đồ ăn")
@@ -227,7 +313,7 @@ namespace Nhom5_QuanLyBida
             btnAdd.BackColor = Color.LightGreen;
             btnAdd.Click += (s, e) =>
             {
-                if (selectedMaBan == null)
+                if (selectedMaBan == null || currentMaHD == null)
                 {
                     MessageBox.Show("Vui lòng chọn bàn trước!");
                     return;
@@ -259,14 +345,87 @@ namespace Nhom5_QuanLyBida
                 };
             }
 
+            // Lưu vào database ngay
+            SaveOrderToDatabase(maMon, orderedItems[maMon].SoLuong);
+
             tlpMonDaChon.Visible = true;
             UpdateOrderList();
             UpdateTotalMoney();
         }
 
+        private void SaveOrderToDatabase(string maMon, int soLuong)
+        {
+            try
+            {
+                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                {
+                    conn.Open();
+
+                    // Check if item already exists in ChiTietHoaDon
+                    string checkQuery = "SELECT COUNT(*) FROM ChiTietHoaDon WHERE MaHD = @MaHD AND MaMon = @MaMon";
+                    using (SqlCommand checkCmd = new SqlCommand(checkQuery, conn))
+                    {
+                        checkCmd.Parameters.AddWithValue("@MaHD", currentMaHD);
+                        checkCmd.Parameters.AddWithValue("@MaMon", maMon);
+                        int count = (int)checkCmd.ExecuteScalar();
+
+                        if (count > 0)
+                        {
+                            // Update existing
+                            string updateQuery = "UPDATE ChiTietHoaDon SET SoLuong = @SoLuong WHERE MaHD = @MaHD AND MaMon = @MaMon";
+                            using (SqlCommand updateCmd = new SqlCommand(updateQuery, conn))
+                            {
+                                updateCmd.Parameters.AddWithValue("@MaHD", currentMaHD);
+                                updateCmd.Parameters.AddWithValue("@MaMon", maMon);
+                                updateCmd.Parameters.AddWithValue("@SoLuong", soLuong);
+                                updateCmd.ExecuteNonQuery();
+                            }
+                        }
+                        else
+                        {
+                            // Insert new
+                            string insertQuery = "INSERT INTO ChiTietHoaDon (MaHD, MaMon, SoLuong) VALUES (@MaHD, @MaMon, @SoLuong)";
+                            using (SqlCommand insertCmd = new SqlCommand(insertQuery, conn))
+                            {
+                                insertCmd.Parameters.AddWithValue("@MaHD", currentMaHD);
+                                insertCmd.Parameters.AddWithValue("@MaMon", maMon);
+                                insertCmd.Parameters.AddWithValue("@SoLuong", soLuong);
+                                insertCmd.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi lưu món: {ex.Message}");
+            }
+        }
+
+        private void RemoveOrderFromDatabase(string maMon)
+        {
+            try
+            {
+                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                {
+                    conn.Open();
+                    string query = "DELETE FROM ChiTietHoaDon WHERE MaHD = @MaHD AND MaMon = @MaMon";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@MaHD", currentMaHD);
+                        cmd.Parameters.AddWithValue("@MaMon", maMon);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi xóa món: {ex.Message}");
+            }
+        }
+
         private void UpdateOrderList()
         {
-            // Clear previous order items except header
             for (int i = tlpMonDaChon.Controls.Count - 1; i >= 0; i--)
             {
                 if (tlpMonDaChon.Controls[i] != label5)
@@ -321,7 +480,6 @@ namespace Nhom5_QuanLyBida
             lblTotal.Location = new Point(10, 55);
             lblTotal.AutoSize = true;
 
-            // Quantity controls
             Button btnMinus = new Button();
             btnMinus.Text = "-";
             btnMinus.Size = new Size(30, 30);
@@ -331,6 +489,7 @@ namespace Nhom5_QuanLyBida
                 if (item.SoLuong > 1)
                 {
                     item.SoLuong--;
+                    SaveOrderToDatabase(item.MaMon, item.SoLuong);
                     UpdateOrderList();
                     UpdateTotalMoney();
                 }
@@ -350,6 +509,7 @@ namespace Nhom5_QuanLyBida
             btnPlus.Click += (s, e) =>
             {
                 item.SoLuong++;
+                SaveOrderToDatabase(item.MaMon, item.SoLuong);
                 UpdateOrderList();
                 UpdateTotalMoney();
             };
@@ -362,6 +522,7 @@ namespace Nhom5_QuanLyBida
             btnRemove.Click += (s, e) =>
             {
                 orderedItems.Remove(item.MaMon);
+                RemoveOrderFromDatabase(item.MaMon);
                 UpdateOrderList();
                 UpdateTotalMoney();
             };
@@ -379,7 +540,7 @@ namespace Nhom5_QuanLyBida
 
         private void UpdateTotalMoney()
         {
-            lblTongTien.ForeColor= Color.Black;
+            lblTongTien.ForeColor = Color.Black;
             int total = orderedItems.Values.Sum(item => item.ThanhTien);
             lblTongTien.Text = total.ToString("N0");
         }
