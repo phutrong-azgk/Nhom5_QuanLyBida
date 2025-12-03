@@ -90,7 +90,7 @@
             this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.05882F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.94118F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 179F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180F));
             this.tableLayoutPanel2.Controls.Add(this.btnSuaNV, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnThemNV, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnXoaNV, 1, 0);
@@ -105,12 +105,13 @@
             // btnSuaNV
             // 
             this.btnSuaNV.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSuaNV.Location = new System.Drawing.Point(376, 3);
+            this.btnSuaNV.Location = new System.Drawing.Point(375, 3);
             this.btnSuaNV.Name = "btnSuaNV";
-            this.btnSuaNV.Size = new System.Drawing.Size(174, 60);
+            this.btnSuaNV.Size = new System.Drawing.Size(175, 60);
             this.btnSuaNV.TabIndex = 4;
             this.btnSuaNV.Text = "Sửa nhân viên";
             this.btnSuaNV.UseVisualStyleBackColor = true;
+            this.btnSuaNV.Click += new System.EventHandler(this.btnSuaNV_Click_1);
             // 
             // btnThemNV
             // 
@@ -121,16 +122,18 @@
             this.btnThemNV.TabIndex = 2;
             this.btnThemNV.Text = "Thêm nhân viên";
             this.btnThemNV.UseVisualStyleBackColor = true;
+            this.btnThemNV.Click += new System.EventHandler(this.btnThemNV_Click_1);
             // 
             // btnXoaNV
             // 
             this.btnXoaNV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnXoaNV.Location = new System.Drawing.Point(178, 3);
             this.btnXoaNV.Name = "btnXoaNV";
-            this.btnXoaNV.Size = new System.Drawing.Size(192, 60);
+            this.btnXoaNV.Size = new System.Drawing.Size(191, 60);
             this.btnXoaNV.TabIndex = 3;
             this.btnXoaNV.Text = "Xóa nhân viên";
             this.btnXoaNV.UseVisualStyleBackColor = true;
+            this.btnXoaNV.Click += new System.EventHandler(this.btnXoaNV_Click_1);
             // 
             // tableLayoutPanel3
             // 

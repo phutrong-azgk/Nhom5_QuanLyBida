@@ -206,8 +206,7 @@ namespace Nhom5_QuanLyBida
         {
             LoadTablesFromDatabase();
         }
-
-        private void btnThemNV_Click(object sender, EventArgs e)
+        private void btnThemNV_Click_1(object sender, EventArgs e)
         {
             ThemNhanVien frmThemNV = new ThemNhanVien();
             try
@@ -239,7 +238,7 @@ namespace Nhom5_QuanLyBida
             }
         }
 
-        private void btnXoaNV_Click(object sender, EventArgs e)
+        private void btnXoaNV_Click_1(object sender, EventArgs e)
         {
             foreach (Control c in flowLayoutPanelNhanVien.Controls)
             {
@@ -250,7 +249,7 @@ namespace Nhom5_QuanLyBida
             }
         }
 
-        private void btnSuaNV_Click(object sender, EventArgs e)
+        private void btnSuaNV_Click_1(object sender, EventArgs e)
         {
             foreach (Control c in flowLayoutPanelNhanVien.Controls)
             {

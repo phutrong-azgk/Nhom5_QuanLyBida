@@ -150,11 +150,9 @@
             this.btnNhanVien.Text = "Quản lý nhân viên";
             this.btnNhanVien.UseVisualStyleBackColor = true;
             this.btnNhanVien.EnabledChanged += new System.EventHandler(this.btnBan_EnabledChanged);
-<<<<<<< HEAD
+
             this.btnNhanVien.Click += new System.EventHandler(this.btnNhanVien_Click_1);
-=======
-            this.btnNhanVien.Click += new System.EventHandler(this.btnNhanVien_Click);
->>>>>>> 6b6dfb2eca6b10e4e6b7cb2218e7412258a00412
+
             // 
             // btnKhach
             // 
@@ -168,11 +166,9 @@
             this.btnKhach.Text = "Quản lý khách";
             this.btnKhach.UseVisualStyleBackColor = true;
             this.btnKhach.EnabledChanged += new System.EventHandler(this.btnBan_EnabledChanged);
-<<<<<<< HEAD
+
             this.btnKhach.Click += new System.EventHandler(this.btnKhach_Click_1);
-=======
-            this.btnKhach.Click += new System.EventHandler(this.btnKhach_Click);
->>>>>>> 6b6dfb2eca6b10e4e6b7cb2218e7412258a00412
+
             // 
             // btnKhuyenMai
             // 

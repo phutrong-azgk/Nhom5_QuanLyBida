@@ -162,7 +162,13 @@ namespace Nhom5_QuanLyBida
                 MessageBox.Show("Lỗi load khách: " + ex.Message);
             }
         }
-        private void btnThemKhach_Click_1(object sender, EventArgs e)
+
+        private void UserControl_Khach_Load_1(object sender, EventArgs e)
+        {
+            LoadTablesFromDatabase();
+        }
+
+        private void btnThemKhach_Click(object sender, EventArgs e)
         {
             ThemKhack frmThemKhach = new ThemKhack();
             try
@@ -192,7 +198,7 @@ namespace Nhom5_QuanLyBida
             }
         }
 
-        private void btnXoaKhach_Click_1(object sender, EventArgs e)
+        private void btnXoaKhach_Click(object sender, EventArgs e)
         {
             foreach (Control c in flowLayoutPanelKhach.Controls)
             {
@@ -203,7 +209,7 @@ namespace Nhom5_QuanLyBida
             }
         }
 
-        private void btnSuaKhach_Click_1(object sender, EventArgs e)
+        private void btnSuaKhach_Click(object sender, EventArgs e)
         {
             foreach (Control c in flowLayoutPanelKhach.Controls)
             {
@@ -212,11 +218,6 @@ namespace Nhom5_QuanLyBida
                     list[0].Enabled = true;
                 }
             }
-        }
-
-        private void UserControl_Khach_Load_1(object sender, EventArgs e)
-        {
-            LoadTablesFromDatabase();
         }
     }
 }
