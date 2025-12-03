@@ -45,6 +45,7 @@
             this.txtTenDN.Name = "txtTenDN";
             this.txtTenDN.Size = new System.Drawing.Size(352, 34);
             this.txtTenDN.TabIndex = 0;
+            this.txtTenDN.Text = "admin";
             // 
             // txtMatKhau
             // 
@@ -55,6 +56,7 @@
             this.txtMatKhau.PasswordChar = '*';
             this.txtMatKhau.Size = new System.Drawing.Size(352, 34);
             this.txtMatKhau.TabIndex = 1;
+            this.txtMatKhau.Text = "admin123";
             // 
             // label1
             // 

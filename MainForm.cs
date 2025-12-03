@@ -128,10 +128,6 @@ namespace Nhom5_QuanLyBida
             ShowScreen(new UserControl_BaoCao());
         }
 
-        private void btnKho_Click(object sender, EventArgs e)
-        {
-            ShowScreen(new UserControl_QLKho());
-        }
 
         private void btnTaiKhoan_Click(object sender, EventArgs e)
         {
@@ -144,6 +140,11 @@ namespace Nhom5_QuanLyBida
         private void btnKhach_Click_1(object sender, EventArgs e)
         {
             ShowScreen(new UserControl_Khach());
+        }
+
+        private void btnKho_Click(object sender, EventArgs e)
+        {
+            ShowScreen(new UserControl_QLKho());
         }
     }
     public static class DatabaseHelper//class để lết nối csdl

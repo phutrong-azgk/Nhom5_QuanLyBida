@@ -51,6 +51,7 @@
             // 
             // dgvTaiKhoan
             // 
+            this.dgvTaiKhoan.AllowUserToDeleteRows = false;
             this.dgvTaiKhoan.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -63,7 +64,7 @@
             this.dgvTaiKhoan.Name = "dgvTaiKhoan";
             this.dgvTaiKhoan.RowHeadersWidth = 51;
             this.dgvTaiKhoan.RowTemplate.Height = 24;
-            this.dgvTaiKhoan.Size = new System.Drawing.Size(1288, 347);
+            this.dgvTaiKhoan.Size = new System.Drawing.Size(1160, 354);
             this.dgvTaiKhoan.TabIndex = 19;
             // 
             // TenDangNhap
@@ -206,7 +207,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(3, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1288, 240);
+            this.groupBox1.Size = new System.Drawing.Size(1160, 240);
             this.groupBox1.TabIndex = 31;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin đăng nhập";
@@ -225,7 +226,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 250F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1294, 603);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1166, 610);
             this.tableLayoutPanel1.TabIndex = 32;
             // 
             // UserControl_QuanLyTK
@@ -234,7 +235,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "UserControl_QuanLyTK";
-            this.Size = new System.Drawing.Size(1363, 670);
+            this.Size = new System.Drawing.Size(1273, 677);
             this.Load += new System.EventHandler(this.UserControl_QuanLyTK_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTaiKhoan)).EndInit();
             this.groupBox1.ResumeLayout(false);
