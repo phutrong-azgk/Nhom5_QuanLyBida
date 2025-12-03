@@ -87,7 +87,7 @@
             this.btnBan.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBan.Location = new System.Drawing.Point(15, 15);
-            this.btnBan.Margin = new System.Windows.Forms.Padding(15, 15, 15, 15);
+            this.btnBan.Margin = new System.Windows.Forms.Padding(15);
             this.btnBan.Name = "btnBan";
             this.btnBan.Size = new System.Drawing.Size(119, 25);
             this.btnBan.TabIndex = 0;
@@ -101,7 +101,7 @@
             this.btnGoiMon.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnGoiMon.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGoiMon.Location = new System.Drawing.Point(15, 70);
-            this.btnGoiMon.Margin = new System.Windows.Forms.Padding(15, 15, 15, 15);
+            this.btnGoiMon.Margin = new System.Windows.Forms.Padding(15);
             this.btnGoiMon.Name = "btnGoiMon";
             this.btnGoiMon.Size = new System.Drawing.Size(119, 25);
             this.btnGoiMon.TabIndex = 0;
@@ -115,7 +115,7 @@
             this.btnKho.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnKho.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnKho.Location = new System.Drawing.Point(15, 125);
-            this.btnKho.Margin = new System.Windows.Forms.Padding(15, 15, 15, 15);
+            this.btnKho.Margin = new System.Windows.Forms.Padding(15);
             this.btnKho.Name = "btnKho";
             this.btnKho.Size = new System.Drawing.Size(119, 25);
             this.btnKho.TabIndex = 0;
@@ -129,7 +129,7 @@
             this.btnTaiKhoan.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnTaiKhoan.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTaiKhoan.Location = new System.Drawing.Point(15, 180);
-            this.btnTaiKhoan.Margin = new System.Windows.Forms.Padding(15, 15, 15, 15);
+            this.btnTaiKhoan.Margin = new System.Windows.Forms.Padding(15);
             this.btnTaiKhoan.Name = "btnTaiKhoan";
             this.btnTaiKhoan.Size = new System.Drawing.Size(119, 25);
             this.btnTaiKhoan.TabIndex = 0;
@@ -143,7 +143,7 @@
             this.btnNhanVien.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNhanVien.Location = new System.Drawing.Point(15, 235);
-            this.btnNhanVien.Margin = new System.Windows.Forms.Padding(15, 15, 15, 15);
+            this.btnNhanVien.Margin = new System.Windows.Forms.Padding(15);
             this.btnNhanVien.Name = "btnNhanVien";
             this.btnNhanVien.Size = new System.Drawing.Size(119, 25);
             this.btnNhanVien.TabIndex = 0;
@@ -157,7 +157,7 @@
             this.btnKhach.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnKhach.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnKhach.Location = new System.Drawing.Point(15, 290);
-            this.btnKhach.Margin = new System.Windows.Forms.Padding(15, 15, 15, 15);
+            this.btnKhach.Margin = new System.Windows.Forms.Padding(15);
             this.btnKhach.Name = "btnKhach";
             this.btnKhach.Size = new System.Drawing.Size(119, 25);
             this.btnKhach.TabIndex = 0;
@@ -171,20 +171,21 @@
             this.btnKhuyenMai.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnKhuyenMai.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnKhuyenMai.Location = new System.Drawing.Point(15, 345);
-            this.btnKhuyenMai.Margin = new System.Windows.Forms.Padding(15, 15, 15, 15);
+            this.btnKhuyenMai.Margin = new System.Windows.Forms.Padding(15);
             this.btnKhuyenMai.Name = "btnKhuyenMai";
             this.btnKhuyenMai.Size = new System.Drawing.Size(119, 25);
             this.btnKhuyenMai.TabIndex = 0;
             this.btnKhuyenMai.Text = "Khuyến mãi";
             this.btnKhuyenMai.UseVisualStyleBackColor = true;
             this.btnKhuyenMai.EnabledChanged += new System.EventHandler(this.btnBan_EnabledChanged);
+            this.btnKhuyenMai.Click += new System.EventHandler(this.btnKhuyenMai_Click);
             // 
             // btnBaoCao
             // 
             this.btnBaoCao.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnBaoCao.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBaoCao.Location = new System.Drawing.Point(15, 400);
-            this.btnBaoCao.Margin = new System.Windows.Forms.Padding(15, 15, 15, 15);
+            this.btnBaoCao.Margin = new System.Windows.Forms.Padding(15);
             this.btnBaoCao.Name = "btnBaoCao";
             this.btnBaoCao.Size = new System.Drawing.Size(119, 25);
             this.btnBaoCao.TabIndex = 0;

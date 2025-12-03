@@ -160,35 +160,38 @@
             // 
             // btnSuaTK
             // 
+            this.btnSuaTK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnSuaTK.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSuaTK.Location = new System.Drawing.Point(311, 48);
             this.btnSuaTK.Name = "btnSuaTK";
             this.btnSuaTK.Size = new System.Drawing.Size(190, 44);
             this.btnSuaTK.TabIndex = 23;
             this.btnSuaTK.Text = "Sửa tài khoản";
-            this.btnSuaTK.UseVisualStyleBackColor = true;
+            this.btnSuaTK.UseVisualStyleBackColor = false;
             this.btnSuaTK.Click += new System.EventHandler(this.btnSuaTK_Click_1);
             // 
             // btnXoaTK
             // 
+            this.btnXoaTK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btnXoaTK.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXoaTK.Location = new System.Drawing.Point(605, 48);
             this.btnXoaTK.Name = "btnXoaTK";
             this.btnXoaTK.Size = new System.Drawing.Size(190, 44);
             this.btnXoaTK.TabIndex = 22;
             this.btnXoaTK.Text = "Xóa tài khoản";
-            this.btnXoaTK.UseVisualStyleBackColor = true;
+            this.btnXoaTK.UseVisualStyleBackColor = false;
             this.btnXoaTK.Click += new System.EventHandler(this.btnXoaTK_Click_1);
             // 
             // btnThemTK
             // 
+            this.btnThemTK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.btnThemTK.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThemTK.Location = new System.Drawing.Point(45, 48);
             this.btnThemTK.Name = "btnThemTK";
             this.btnThemTK.Size = new System.Drawing.Size(190, 44);
             this.btnThemTK.TabIndex = 21;
             this.btnThemTK.Text = "Tạo tài khoản";
-            this.btnThemTK.UseVisualStyleBackColor = true;
+            this.btnThemTK.UseVisualStyleBackColor = false;
             this.btnThemTK.Click += new System.EventHandler(this.btnThemTK_Click_1);
             // 
             // groupBox1

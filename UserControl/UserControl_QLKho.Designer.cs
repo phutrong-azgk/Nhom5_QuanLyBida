@@ -146,6 +146,7 @@
             // 
             // btn_Sua
             // 
+            this.btn_Sua.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btn_Sua.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Sua.Location = new System.Drawing.Point(741, 2);
             this.btn_Sua.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -153,11 +154,12 @@
             this.btn_Sua.Size = new System.Drawing.Size(240, 44);
             this.btn_Sua.TabIndex = 3;
             this.btn_Sua.Text = "Sửa";
-            this.btn_Sua.UseVisualStyleBackColor = true;
+            this.btn_Sua.UseVisualStyleBackColor = false;
             this.btn_Sua.Click += new System.EventHandler(this.btn_Sua_Click);
             // 
             // btn_Xoa
             // 
+            this.btn_Xoa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btn_Xoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Xoa.Location = new System.Drawing.Point(495, 2);
             this.btn_Xoa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -165,7 +167,7 @@
             this.btn_Xoa.Size = new System.Drawing.Size(240, 44);
             this.btn_Xoa.TabIndex = 2;
             this.btn_Xoa.Text = "Xóa";
-            this.btn_Xoa.UseVisualStyleBackColor = true;
+            this.btn_Xoa.UseVisualStyleBackColor = false;
             this.btn_Xoa.Click += new System.EventHandler(this.btn_Xoa_Click);
             // 
             // label1
@@ -180,6 +182,7 @@
             // 
             // btn_Them
             // 
+            this.btn_Them.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.btn_Them.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Them.Location = new System.Drawing.Point(249, 2);
             this.btn_Them.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -187,7 +190,7 @@
             this.btn_Them.Size = new System.Drawing.Size(240, 44);
             this.btn_Them.TabIndex = 1;
             this.btn_Them.Text = "Thêm";
-            this.btn_Them.UseVisualStyleBackColor = true;
+            this.btn_Them.UseVisualStyleBackColor = false;
             this.btn_Them.Click += new System.EventHandler(this.btn_Them_Click);
             // 
             // tableLayoutPanel2
@@ -249,7 +252,7 @@
             // txtMaMon
             // 
             this.txtMaMon.Location = new System.Drawing.Point(619, 4);
-            this.txtMaMon.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMaMon.Margin = new System.Windows.Forms.Padding(4);
             this.txtMaMon.Name = "txtMaMon";
             this.txtMaMon.Size = new System.Drawing.Size(196, 22);
             this.txtMaMon.TabIndex = 6;
@@ -257,7 +260,7 @@
             // txtTenMon
             // 
             this.txtTenMon.Location = new System.Drawing.Point(1029, 4);
-            this.txtTenMon.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTenMon.Margin = new System.Windows.Forms.Padding(4);
             this.txtTenMon.Name = "txtTenMon";
             this.txtTenMon.Size = new System.Drawing.Size(199, 22);
             this.txtTenMon.TabIndex = 7;
@@ -265,7 +268,7 @@
             // txtMaKho
             // 
             this.txtMaKho.Location = new System.Drawing.Point(209, 4);
-            this.txtMaKho.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMaKho.Margin = new System.Windows.Forms.Padding(4);
             this.txtMaKho.Name = "txtMaKho";
             this.txtMaKho.Size = new System.Drawing.Size(196, 22);
             this.txtMaKho.TabIndex = 8;

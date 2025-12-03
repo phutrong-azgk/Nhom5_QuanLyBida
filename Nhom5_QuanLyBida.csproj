@@ -122,16 +122,22 @@
     <Compile Include="UserControl\UserControl_QuanLyTK.Designer.cs">
       <DependentUpon>UserControl_QuanLyTK.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControl_Khach.cs">
+    <Compile Include="UserControl\UserControl_Khach.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControl_Khach.Designer.cs">
+    <Compile Include="UserControl\UserControl_Khach.Designer.cs">
       <DependentUpon>UserControl_Khach.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControl_NhanVien.cs">
+    <Compile Include="UserControl\UserControl_KhuyenMai.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControl_NhanVien.Designer.cs">
+    <Compile Include="UserControl\UserControl_KhuyenMai.Designer.cs">
+      <DependentUpon>UserControl_KhuyenMai.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\UserControl_NhanVien.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\UserControl_NhanVien.Designer.cs">
       <DependentUpon>UserControl_NhanVien.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="FormKhach\SuaKhach.resx">
@@ -179,10 +185,13 @@
     <EmbeddedResource Include="UserControl\UserControl_QuanLyTK.resx">
       <DependentUpon>UserControl_QuanLyTK.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControl_Khach.resx">
+    <EmbeddedResource Include="UserControl\UserControl_Khach.resx">
       <DependentUpon>UserControl_Khach.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControl_NhanVien.resx">
+    <EmbeddedResource Include="UserControl\UserControl_KhuyenMai.resx">
+      <DependentUpon>UserControl_KhuyenMai.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\UserControl_NhanVien.resx">
       <DependentUpon>UserControl_NhanVien.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">

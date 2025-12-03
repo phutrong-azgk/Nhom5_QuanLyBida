@@ -51,11 +51,12 @@
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.41885F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 79.58115F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(714, 382);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(952, 470);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanelNhanVien
@@ -66,11 +67,12 @@
             this.tableLayoutPanelNhanVien.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanelNhanVien.Controls.Add(this.tableLayoutPanel2, 1, 0);
             this.tableLayoutPanelNhanVien.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelNhanVien.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanelNhanVien.Location = new System.Drawing.Point(4, 4);
+            this.tableLayoutPanelNhanVien.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanelNhanVien.Name = "tableLayoutPanelNhanVien";
             this.tableLayoutPanelNhanVien.RowCount = 1;
             this.tableLayoutPanelNhanVien.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelNhanVien.Size = new System.Drawing.Size(708, 72);
+            this.tableLayoutPanelNhanVien.Size = new System.Drawing.Size(944, 87);
             this.tableLayoutPanelNhanVien.TabIndex = 5;
             // 
             // label1
@@ -78,9 +80,10 @@
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("Bahnschrift", 19.8F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Location = new System.Drawing.Point(4, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(143, 72);
+            this.label1.Size = new System.Drawing.Size(191, 87);
             this.label1.TabIndex = 0;
             this.label1.Text = "Quản lý nhân viên";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -88,51 +91,61 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.05882F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.94118F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.Controls.Add(this.btnSuaNV, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnThemNV, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnXoaNV, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(152, 3);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(203, 4);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(553, 66);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(737, 79);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // btnSuaNV
             // 
+            this.btnSuaNV.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnSuaNV.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSuaNV.Location = new System.Drawing.Point(375, 3);
+            this.btnSuaNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSuaNV.Location = new System.Drawing.Point(530, 45);
+            this.btnSuaNV.Margin = new System.Windows.Forms.Padding(40, 45, 40, 45);
             this.btnSuaNV.Name = "btnSuaNV";
-            this.btnSuaNV.Size = new System.Drawing.Size(175, 60);
+            this.btnSuaNV.Size = new System.Drawing.Size(167, 1);
             this.btnSuaNV.TabIndex = 4;
             this.btnSuaNV.Text = "Sửa nhân viên";
-            this.btnSuaNV.UseVisualStyleBackColor = true;
+            this.btnSuaNV.UseVisualStyleBackColor = false;
             this.btnSuaNV.Click += new System.EventHandler(this.btnSuaNV_Click_1);
             // 
             // btnThemNV
             // 
+            this.btnThemNV.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.btnThemNV.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnThemNV.Location = new System.Drawing.Point(3, 3);
+            this.btnThemNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThemNV.Location = new System.Drawing.Point(40, 45);
+            this.btnThemNV.Margin = new System.Windows.Forms.Padding(40, 45, 40, 45);
             this.btnThemNV.Name = "btnThemNV";
-            this.btnThemNV.Size = new System.Drawing.Size(169, 60);
+            this.btnThemNV.Size = new System.Drawing.Size(165, 1);
             this.btnThemNV.TabIndex = 2;
             this.btnThemNV.Text = "Thêm nhân viên";
-            this.btnThemNV.UseVisualStyleBackColor = true;
+            this.btnThemNV.UseVisualStyleBackColor = false;
             this.btnThemNV.Click += new System.EventHandler(this.btnThemNV_Click_1);
             // 
             // btnXoaNV
             // 
+            this.btnXoaNV.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btnXoaNV.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnXoaNV.Location = new System.Drawing.Point(178, 3);
+            this.btnXoaNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXoaNV.Location = new System.Drawing.Point(285, 45);
+            this.btnXoaNV.Margin = new System.Windows.Forms.Padding(40, 45, 40, 45);
             this.btnXoaNV.Name = "btnXoaNV";
-            this.btnXoaNV.Size = new System.Drawing.Size(191, 60);
+            this.btnXoaNV.Size = new System.Drawing.Size(165, 1);
             this.btnXoaNV.TabIndex = 3;
             this.btnXoaNV.Text = "Xóa nhân viên";
-            this.btnXoaNV.UseVisualStyleBackColor = true;
+            this.btnXoaNV.UseVisualStyleBackColor = false;
             this.btnXoaNV.Click += new System.EventHandler(this.btnXoaNV_Click_1);
             // 
             // tableLayoutPanel3
@@ -141,29 +154,32 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.Controls.Add(this.flowLayoutPanelNhanVien, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 81);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(4, 99);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(708, 298);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(944, 367);
             this.tableLayoutPanel3.TabIndex = 6;
             // 
             // flowLayoutPanelNhanVien
             // 
             this.flowLayoutPanelNhanVien.AutoScroll = true;
             this.flowLayoutPanelNhanVien.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelNhanVien.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanelNhanVien.Location = new System.Drawing.Point(4, 4);
+            this.flowLayoutPanelNhanVien.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanelNhanVien.Name = "flowLayoutPanelNhanVien";
-            this.flowLayoutPanelNhanVien.Size = new System.Drawing.Size(702, 292);
+            this.flowLayoutPanelNhanVien.Size = new System.Drawing.Size(936, 359);
             this.flowLayoutPanelNhanVien.TabIndex = 6;
             // 
             // UserControl_NhanVien
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UserControl_NhanVien";
-            this.Size = new System.Drawing.Size(714, 382);
+            this.Size = new System.Drawing.Size(952, 470);
             this.Load += new System.EventHandler(this.UserControl_NhanVien_Load_1);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanelNhanVien.ResumeLayout(false);

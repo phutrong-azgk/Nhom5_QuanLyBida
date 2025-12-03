@@ -51,12 +51,12 @@
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.14358F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.85642F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(674, 375);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(899, 462);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanelNhanVien
@@ -67,66 +67,72 @@
             this.tableLayoutPanelNhanVien.Controls.Add(this.tableLayoutPanel2, 1, 0);
             this.tableLayoutPanelNhanVien.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanelNhanVien.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelNhanVien.Location = new System.Drawing.Point(2, 2);
-            this.tableLayoutPanelNhanVien.Margin = new System.Windows.Forms.Padding(2);
+            this.tableLayoutPanelNhanVien.Location = new System.Drawing.Point(3, 2);
+            this.tableLayoutPanelNhanVien.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanelNhanVien.Name = "tableLayoutPanelNhanVien";
             this.tableLayoutPanelNhanVien.RowCount = 1;
             this.tableLayoutPanelNhanVien.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelNhanVien.Size = new System.Drawing.Size(670, 67);
+            this.tableLayoutPanelNhanVien.Size = new System.Drawing.Size(893, 84);
             this.tableLayoutPanelNhanVien.TabIndex = 7;
             // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.05882F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.94118F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.Controls.Add(this.btnSuaKhach, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnThemKhach, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnXoaKhach, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(143, 2);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(191, 2);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(525, 63);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(699, 80);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // btnSuaKhach
             // 
+            this.btnSuaKhach.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnSuaKhach.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSuaKhach.Location = new System.Drawing.Point(386, 2);
-            this.btnSuaKhach.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSuaKhach.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSuaKhach.Location = new System.Drawing.Point(506, 45);
+            this.btnSuaKhach.Margin = new System.Windows.Forms.Padding(40, 45, 40, 45);
             this.btnSuaKhach.Name = "btnSuaKhach";
-            this.btnSuaKhach.Size = new System.Drawing.Size(137, 59);
+            this.btnSuaKhach.Size = new System.Drawing.Size(153, 1);
             this.btnSuaKhach.TabIndex = 4;
             this.btnSuaKhach.Text = "Sửa khách";
-            this.btnSuaKhach.UseVisualStyleBackColor = true;
+            this.btnSuaKhach.UseVisualStyleBackColor = false;
             this.btnSuaKhach.Click += new System.EventHandler(this.btnSuaKhach_Click);
             // 
             // btnThemKhach
             // 
+            this.btnThemKhach.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.btnThemKhach.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnThemKhach.Location = new System.Drawing.Point(2, 2);
-            this.btnThemKhach.Margin = new System.Windows.Forms.Padding(2);
+            this.btnThemKhach.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThemKhach.Location = new System.Drawing.Point(40, 45);
+            this.btnThemKhach.Margin = new System.Windows.Forms.Padding(40, 45, 40, 45);
             this.btnThemKhach.Name = "btnThemKhach";
-            this.btnThemKhach.Size = new System.Drawing.Size(177, 59);
+            this.btnThemKhach.Size = new System.Drawing.Size(153, 1);
             this.btnThemKhach.TabIndex = 2;
             this.btnThemKhach.Text = "Thêm khách";
-            this.btnThemKhach.UseVisualStyleBackColor = true;
+            this.btnThemKhach.UseVisualStyleBackColor = false;
             this.btnThemKhach.Click += new System.EventHandler(this.btnThemKhach_Click);
             // 
             // btnXoaKhach
             // 
+            this.btnXoaKhach.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btnXoaKhach.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnXoaKhach.Location = new System.Drawing.Point(183, 2);
-            this.btnXoaKhach.Margin = new System.Windows.Forms.Padding(2);
+            this.btnXoaKhach.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXoaKhach.Location = new System.Drawing.Point(273, 45);
+            this.btnXoaKhach.Margin = new System.Windows.Forms.Padding(40, 45, 40, 45);
             this.btnXoaKhach.Name = "btnXoaKhach";
-            this.btnXoaKhach.Size = new System.Drawing.Size(199, 59);
+            this.btnXoaKhach.Size = new System.Drawing.Size(153, 1);
             this.btnXoaKhach.TabIndex = 3;
             this.btnXoaKhach.Text = "Xóa khách";
-            this.btnXoaKhach.UseVisualStyleBackColor = true;
+            this.btnXoaKhach.UseVisualStyleBackColor = false;
             this.btnXoaKhach.Click += new System.EventHandler(this.btnXoaKhach_Click);
             // 
             // label1
@@ -134,9 +140,10 @@
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("Bahnschrift", 19.8F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Location = new System.Drawing.Point(4, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(135, 67);
+            this.label1.Size = new System.Drawing.Size(180, 84);
             this.label1.TabIndex = 0;
             this.label1.Text = "Quản lý khách";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -147,31 +154,32 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.Controls.Add(this.flowLayoutPanelKhach, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(2, 73);
-            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(2);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 90);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(670, 300);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(893, 370);
             this.tableLayoutPanel3.TabIndex = 8;
             // 
             // flowLayoutPanelKhach
             // 
             this.flowLayoutPanelKhach.AutoScroll = true;
             this.flowLayoutPanelKhach.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelKhach.Location = new System.Drawing.Point(2, 2);
-            this.flowLayoutPanelKhach.Margin = new System.Windows.Forms.Padding(2);
+            this.flowLayoutPanelKhach.Location = new System.Drawing.Point(3, 2);
+            this.flowLayoutPanelKhach.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanelKhach.Name = "flowLayoutPanelKhach";
-            this.flowLayoutPanelKhach.Size = new System.Drawing.Size(666, 296);
+            this.flowLayoutPanelKhach.Size = new System.Drawing.Size(887, 366);
             this.flowLayoutPanelKhach.TabIndex = 8;
             // 
             // UserControl_Khach
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UserControl_Khach";
-            this.Size = new System.Drawing.Size(674, 375);
+            this.Size = new System.Drawing.Size(899, 462);
             this.Load += new System.EventHandler(this.UserControl_Khach_Load_1);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanelNhanVien.ResumeLayout(false);

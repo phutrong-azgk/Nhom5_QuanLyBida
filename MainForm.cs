@@ -146,6 +146,11 @@ namespace Nhom5_QuanLyBida
         {
             ShowScreen(new UserControl_QLKho());
         }
+
+        private void btnKhuyenMai_Click(object sender, EventArgs e)
+        {
+            ShowScreen(new UserControl_KhuyenMai());
+        }
     }
     public static class DatabaseHelper//class để lết nối csdl
     {
