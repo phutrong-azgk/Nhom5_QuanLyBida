@@ -137,12 +137,21 @@ namespace Nhom5_QuanLyBida
         {
             ShowScreen(new UserControl_QuanLyTK());
         }
+<<<<<<< HEAD
         private void btnNhanVien_Click_1(object sender, EventArgs e)
+=======
+
+        private void btnNhanVien_Click(object sender, EventArgs e)
+>>>>>>> 6b6dfb2eca6b10e4e6b7cb2218e7412258a00412
         {
             ShowScreen(new UserControl_NhanVien());
         }
 
+<<<<<<< HEAD
         private void btnKhach_Click_1(object sender, EventArgs e)
+=======
+        private void btnKhach_Click(object sender, EventArgs e)
+>>>>>>> 6b6dfb2eca6b10e4e6b7cb2218e7412258a00412
         {
             ShowScreen(new UserControl_Khach());
         }
