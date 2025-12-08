@@ -51,6 +51,34 @@ namespace Nhom5_QuanLyBida
             lblTongChi.AutoSize = true;
             lblTongChi.Location = new Point(10, 95);
 
+            Label lblDiemThuong = new Label();
+            lblDiemThuong.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+            lblDiemThuong.ForeColor = Color.DarkGreen;
+            lblDiemThuong.AutoSize = true;
+            lblDiemThuong.Location = new Point(10, 120);
+
+            try
+            {
+                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                {
+                    conn.Open();
+                    string query = "SELECT dbo.fn_DiemKhachHang(@MaKhach) AS DiemThuong";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@MaKhach", maKhach);
+                        object result = cmd.ExecuteScalar();
+
+                        int diemThuong = result != null && result != DBNull.Value ? Convert.ToInt32(result) : 0;
+                        lblDiemThuong.Text = $"Điểm thưởng: {diemThuong}";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                lblDiemThuong.Text = "Điểm thưởng: N/A";
+                MessageBox.Show($"Lỗi khi lấy điểm thưởng: {ex.Message}");
+            }
+
             Button btnEdit = new Button();
             btnEdit.Text = "Sửa";
             btnEdit.Size = new Size(80, 30);
@@ -129,8 +157,10 @@ namespace Nhom5_QuanLyBida
             tableBox.Controls.Add(lblMaKhach);
             tableBox.Controls.Add(lblSoHoaDon);
             tableBox.Controls.Add(lblTongChi);
+            tableBox.Controls.Add(lblDiemThuong);
             tableBox.Controls.Add(btnEdit);
             tableBox.Controls.Add(btnDelete);
+            
 
             flowLayoutPanelKhach.Controls.Add(tableBox);
         }

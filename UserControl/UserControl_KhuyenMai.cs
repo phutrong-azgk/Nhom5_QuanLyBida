@@ -31,8 +31,29 @@ namespace Nhom5_QuanLyBida
             promoCard.Name = maKM;
             promoCard.Cursor = Cursors.Hand;
 
-            // Kiểm tra khuyến mãi còn hiệu lực không
-            bool isActive = DateTime.Now >= ngayBatDau && DateTime.Now <= ngayKetThuc;
+            // Kiểm tra khuyến mãi còn hiệu lực không bằng function
+            bool isActive = false;
+            try
+            {
+                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                {
+                    conn.Open();
+                    string query = "SELECT dbo.fn_KiemTraKhuyenMaiKhaDung(@MaKM)";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@MaKM", maKM);
+                        object result = cmd.ExecuteScalar();
+                        isActive = result != null && result != DBNull.Value && Convert.ToBoolean(result);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Nếu có lỗi, fallback về cách kiểm tra thủ công
+                isActive = DateTime.Now >= ngayBatDau && DateTime.Now <= ngayKetThuc;
+                MessageBox.Show($"Lỗi khi kiểm tra khuyến mãi: {ex.Message}");
+            }
+
             Color cardColor = isActive ? Color.LightGreen : Color.LightGray;
             promoCard.BackColor = cardColor;
             promoCard.Tag = isActive ? "Active" : "Inactive";
@@ -77,8 +98,8 @@ namespace Nhom5_QuanLyBida
             // Status label
             Label lblStatus = new Label();
             lblStatus.Name = "lblStatus";
-            lblStatus.Text = isActive ? "Đang hoạt động" : "Hết hạn";
-            lblStatus.Font = new Font("Arial", 9, FontStyle.Italic);
+            lblStatus.Text = isActive ? "✓ Đang hoạt động" : "✗ Hết hạn";
+            lblStatus.Font = new Font("Arial", 9, FontStyle.Bold);
             lblStatus.ForeColor = isActive ? Color.DarkGreen : Color.Red;
             lblStatus.TextAlign = ContentAlignment.MiddleCenter;
             lblStatus.Location = new Point(10, 165);
