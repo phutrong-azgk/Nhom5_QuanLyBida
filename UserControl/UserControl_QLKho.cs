@@ -311,7 +311,7 @@ namespace Nhom5_QuanLyBida
         }
 
 
-       
+
 
         private string GenerateMaKho()
         {
@@ -325,10 +325,20 @@ namespace Nhom5_QuanLyBida
                 if (result == null)
                     return "K001";
 
-                string lastCode = result.ToString(); // K005
-                int number = int.Parse(lastCode.Substring(1));  // 5
-                number++;
+                string lastCode = result.ToString().Trim(); // Trim whitespace
 
+                // Validate the format (should start with 'K' followed by digits)
+                if (string.IsNullOrEmpty(lastCode) || lastCode.Length < 2 || !lastCode.StartsWith("K"))
+                    return "K001";
+
+                // Extract numeric part
+                string numericPart = lastCode.Substring(1);
+
+                // Try to parse the numeric part
+                if (!int.TryParse(numericPart, out int number))
+                    return "K001"; // Return default if parsing fails
+
+                number++;
                 return "K" + number.ToString("000");
             }
         }

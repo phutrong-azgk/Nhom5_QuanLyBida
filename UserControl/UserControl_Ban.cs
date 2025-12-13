@@ -750,30 +750,46 @@ namespace Nhom5_QuanLyBida
                 MessageBox.Show("Vui lòng chọn bàn trước!");
                 return;
             }
-
             string maBan = selectedTableId;
-
             // Lấy hóa đơn hiện tại của bàn
             string maHD = GetActiveInvoiceForTable(maBan);
-
             if (maHD == null)
             {
                 MessageBox.Show("Không tìm thấy hóa đơn cho bàn này!");
                 return;
             }
-
             try
             {
                 using (SqlConnection conn = DatabaseHelper.GetConnection())
                 {
                     conn.Open();
 
+                    // Lấy MaKhach từ HoaDon
+                    string maKhach = null;
+                    string queryGetMaKhach = "SELECT MaKhach FROM HoaDon WHERE MaHD = @MaHD";
+                    using (SqlCommand cmdGetMaKhach = new SqlCommand(queryGetMaKhach, conn))
+                    {
+                        cmdGetMaKhach.Parameters.AddWithValue("@MaHD", maHD);
+                        object result = cmdGetMaKhach.ExecuteScalar();
+                        if (result != null && result != DBNull.Value)
+                        {
+                            maKhach = result.ToString();
+                        }
+                    }
+
+                    // Kiểm tra nếu không có MaKhach
+                    if (string.IsNullOrEmpty(maKhach))
+                    {
+                        MessageBox.Show("Không tìm thấy thông tin khách hàng cho hóa đơn này!");
+                        return;
+                    }
+
                     // Sử dụng stored procedure sp_TinhTienHoaDon
                     using (SqlCommand cmd = new SqlCommand("sp_TinhTienHoaDon", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@MaHD", maHD);
-
+                        cmd.Parameters.AddWithValue("@MaKhach", maKhach);
                         cmd.ExecuteNonQuery();
                     }
 
@@ -783,16 +799,15 @@ namespace Nhom5_QuanLyBida
                     {
                         cmdTotal.Parameters.AddWithValue("@MaHD", maHD);
                         object result = cmdTotal.ExecuteScalar();
-
                         if (result != null && result != DBNull.Value)
                         {
                             decimal tongTien = Convert.ToDecimal(result);
-                            MessageBox.Show($"Tính tiền thành công!\n\nMã hóa đơn: {maHD}\nTổng tiền: {tongTien:N0} VNĐ",
+                            MessageBox.Show($"Tính tiền thành công!\n\nMã hóa đơn: {maHD}\nMã khách: {maKhach}\nTổng tiền: {tongTien:N0} VNĐ",
                                 "Thanh toán", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
                         {
-                            MessageBox.Show($"Tính tiền thành công!\n\nMã hóa đơn: {maHD}\nTổng tiền: 0 VNĐ",
+                            MessageBox.Show($"Tính tiền thành công!\n\nMã hóa đơn: {maHD}\nMã khách: {maKhach}\nTổng tiền: 0 VNĐ",
                                 "Thanh toán", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
