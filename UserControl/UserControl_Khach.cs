@@ -160,23 +160,53 @@ namespace Nhom5_QuanLyBida
             tableBox.Controls.Add(lblDiemThuong);
             tableBox.Controls.Add(btnEdit);
             tableBox.Controls.Add(btnDelete);
-            
+
 
             flowLayoutPanelKhach.Controls.Add(tableBox);
         }
-        private void LoadTablesFromDatabase()
+        private void LoadTablesFromDatabase(string keyword = "", string sortOption = "")
         {
             try
             {
                 using (SqlConnection conn = DatabaseHelper.GetConnection())
                 {
                     conn.Open();
-                    string query = "SELECT * FROM Khach";
-                    SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
-                    ds = new DataSet();
-                    adapter.Fill(ds, "Khach");
 
-                    foreach (DataRow row in ds.Tables["Khach"].Rows)
+                    string orderBy = "";
+                    switch (sortOption)
+                    {
+                        case "Số hóa đơn ↑":
+                            orderBy = "ORDER BY SoHoaDon ASC";
+                            break;
+                        case "Số hóa đơn ↓":
+                            orderBy = "ORDER BY SoHoaDon DESC";
+                            break;
+                        case "Tổng chi ↑":
+                            orderBy = "ORDER BY TongChi ASC";
+                            break;
+                        case "Tổng chi ↓":
+                            orderBy = "ORDER BY TongChi DESC";
+                            break;
+                        case "Điểm thưởng ↑":
+                            orderBy = "ORDER BY dbo.fn_DiemKhachHang(MaKhach) ASC";
+                            break;
+                        case "Điểm thưởng ↓":
+                            orderBy = "ORDER BY dbo.fn_DiemKhachHang(MaKhach) DESC";
+                            break;
+                    }
+
+                    string sql = $@"SELECT * FROM Khach WHERE TenKhach COLLATE Vietnamese_CI_AI LIKE @keyword {orderBy}";
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@keyword", "%" + keyword + "%");
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    flowLayoutPanelKhach.Controls.Clear();
+
+                    foreach (DataRow row in dt.Rows)
                     {
                         AddTable(
                             row["TenKhach"].ToString(),
@@ -192,12 +222,17 @@ namespace Nhom5_QuanLyBida
                 MessageBox.Show("Lỗi load khách: " + ex.Message);
             }
         }
-
+        private void LoadSapXep()
+        {
+            cboTangGiam.Items.Clear();
+            string[] sx = { "Số hóa đơn ↑", "Số hóa đơn ↓", "Tổng chi ↑", "Tổng chi ↓", "Điểm thưởng ↑", "Điểm thưởng ↓" };
+            cboTangGiam.Items.AddRange(sx);
+        }
         private void UserControl_Khach_Load_1(object sender, EventArgs e)
         {
+            LoadSapXep();
             LoadTablesFromDatabase();
         }
-
         private void btnThemKhach_Click(object sender, EventArgs e)
         {
             ThemKhack frmThemKhach = new ThemKhack();
@@ -248,6 +283,17 @@ namespace Nhom5_QuanLyBida
                     list[0].Enabled = true;
                 }
             }
+        }
+
+        private void txtTimKiem_TextChanged(object sender, EventArgs e)
+        {
+            LoadTablesFromDatabase(txtTimKiem.Text.Trim(), cboTangGiam.SelectedItem?.ToString());
+        }
+
+        private void cboTangGiam_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadTablesFromDatabase(txtTimKiem.Text.Trim(), cboTangGiam.SelectedItem.ToString()
+    );
         }
     }
 }
