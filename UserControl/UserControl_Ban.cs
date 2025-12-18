@@ -573,9 +573,6 @@ namespace Nhom5_QuanLyBida
                     {
                         SqlDataReader reader = cmd.ExecuteReader();
 
-                        // Thêm option "Không chọn"
-                        cmbCustomer.Items.Add(new { MaKhach = "", TenKhach = "-- Không chọn khách --" });
-
                         while (reader.Read())
                         {
                             cmbCustomer.Items.Add(new
