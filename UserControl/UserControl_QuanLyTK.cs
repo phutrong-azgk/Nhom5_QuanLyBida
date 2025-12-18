@@ -27,6 +27,12 @@ namespace Nhom5_QuanLyBida
 
         private void UserControl_QuanLyTK_Load(object sender, EventArgs e)
         {
+            dgvTaiKhoan.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvTaiKhoan.MultiSelect = false;
+            dgvTaiKhoan.ReadOnly = true;
+            dgvTaiKhoan.AllowUserToAddRows = false;
+           
+
             LoadTaiKhoan();
             LoadVaiTro();
 
@@ -200,6 +206,5 @@ namespace Nhom5_QuanLyBida
             }
         }
 
-        
     }
 }

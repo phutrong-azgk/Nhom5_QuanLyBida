@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.dgvTaiKhoan = new System.Windows.Forms.DataGridView();
-            this.TenDangNhap = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MatKhau = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VaiTro = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtTimKiem = new System.Windows.Forms.TextBox();
@@ -44,6 +41,9 @@
             this.btnThemTK = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.TenDangNhap = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MatKhau = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VaiTro = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTaiKhoan)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -52,41 +52,19 @@
             // dgvTaiKhoan
             // 
             this.dgvTaiKhoan.AllowUserToDeleteRows = false;
-            this.dgvTaiKhoan.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvTaiKhoan.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvTaiKhoan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTaiKhoan.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.TenDangNhap,
             this.MatKhau,
             this.VaiTro});
+            this.dgvTaiKhoan.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvTaiKhoan.Location = new System.Drawing.Point(3, 253);
             this.dgvTaiKhoan.Name = "dgvTaiKhoan";
             this.dgvTaiKhoan.RowHeadersWidth = 51;
             this.dgvTaiKhoan.RowTemplate.Height = 24;
-            this.dgvTaiKhoan.Size = new System.Drawing.Size(1160, 354);
+            this.dgvTaiKhoan.Size = new System.Drawing.Size(1185, 361);
             this.dgvTaiKhoan.TabIndex = 19;
-            // 
-            // TenDangNhap
-            // 
-            this.TenDangNhap.HeaderText = "Tên đăng nhập";
-            this.TenDangNhap.MinimumWidth = 6;
-            this.TenDangNhap.Name = "TenDangNhap";
-            this.TenDangNhap.Width = 350;
-            // 
-            // MatKhau
-            // 
-            this.MatKhau.HeaderText = "mật khẩu";
-            this.MatKhau.MinimumWidth = 6;
-            this.MatKhau.Name = "MatKhau";
-            this.MatKhau.Width = 350;
-            // 
-            // VaiTro
-            // 
-            this.VaiTro.HeaderText = "vai trò";
-            this.VaiTro.MinimumWidth = 6;
-            this.VaiTro.Name = "VaiTro";
-            this.VaiTro.Width = 350;
             // 
             // label3
             // 
@@ -210,7 +188,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(3, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1160, 240);
+            this.groupBox1.Size = new System.Drawing.Size(1185, 240);
             this.groupBox1.TabIndex = 31;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin đăng nhập";
@@ -229,8 +207,29 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 250F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1166, 610);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1191, 617);
             this.tableLayoutPanel1.TabIndex = 32;
+            // 
+            // TenDangNhap
+            // 
+            this.TenDangNhap.DataPropertyName = "TenDangNhap";
+            this.TenDangNhap.HeaderText = "Tên đăng nhập";
+            this.TenDangNhap.MinimumWidth = 6;
+            this.TenDangNhap.Name = "TenDangNhap";
+            // 
+            // MatKhau
+            // 
+            this.MatKhau.DataPropertyName = "MatKhau";
+            this.MatKhau.HeaderText = "mật khẩu";
+            this.MatKhau.MinimumWidth = 6;
+            this.MatKhau.Name = "MatKhau";
+            // 
+            // VaiTro
+            // 
+            this.VaiTro.DataPropertyName = "VaiTro";
+            this.VaiTro.HeaderText = "vai trò";
+            this.VaiTro.MinimumWidth = 6;
+            this.VaiTro.Name = "VaiTro";
             // 
             // UserControl_QuanLyTK
             // 
@@ -238,7 +237,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "UserControl_QuanLyTK";
-            this.Size = new System.Drawing.Size(1273, 677);
+            this.Size = new System.Drawing.Size(1219, 663);
             this.Load += new System.EventHandler(this.UserControl_QuanLyTK_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTaiKhoan)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -250,9 +249,6 @@
 
         #endregion
         private System.Windows.Forms.DataGridView dgvTaiKhoan;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TenDangNhap;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MatKhau;
-        private System.Windows.Forms.DataGridViewTextBoxColumn VaiTro;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtTimKiem;
@@ -265,5 +261,8 @@
         private System.Windows.Forms.Button btnThemTK;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TenDangNhap;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MatKhau;
+        private System.Windows.Forms.DataGridViewTextBoxColumn VaiTro;
     }
 }

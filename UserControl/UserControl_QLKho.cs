@@ -31,14 +31,17 @@ namespace Nhom5_QuanLyBida
             txtTenMon.Text = "";
             txtSLNhap.Text = "0";
             txtSLXuat.Text = "0";
+            txt_DonGia.Text = "0";
             dtNgayNhap.Value = DateTime.Now;
 
             // Cho phép nhập MÃ MÓN
             txtMaMon.Enabled = true;
             txtTenMon.Enabled = true;
+            dtNgayNhap.Enabled = true;
 
             // Cho nhập số lượng nhập hoặc xuất
             txtSLNhap.Enabled = true;
+            txt_DonGia.Enabled = true;
             txtSLXuat.Enabled = false;
 
             // Bật nút Lưu
@@ -94,6 +97,8 @@ namespace Nhom5_QuanLyBida
             txtTenMon.Text = "";
             txtSLNhap.Text = "";
             txtSLXuat.Text = "";
+            txt_DonGia.Text = "";
+            dtNgayNhap.Text = "";
         }
 
 
@@ -108,14 +113,15 @@ namespace Nhom5_QuanLyBida
             string selectedMaKho = txtMaKho.Text; // Lấy mã kho từ TextBox
 
             // Không cho sửa mã kho + mã món
-            txtMaKho.Enabled = true;
-            txtMaMon.Enabled = true;
+            txtMaKho.Enabled = false;
+            txtMaMon.Enabled = false;
             txtTenMon.Enabled = true;
 
             // Cho sửa số lượng / ngày nhập
             txtSLNhap.Enabled = true;
             txtSLXuat.Enabled = true;
             dtNgayNhap.Enabled = true;
+            txt_DonGia.Enabled = true;
 
             btn_Luu.Enabled = true;
 
@@ -124,23 +130,19 @@ namespace Nhom5_QuanLyBida
 
         private void btn_Luu_Click(object sender, EventArgs e)
         {
-            // Kiểm tra dữ liệu đầu vào
-            if (string.IsNullOrEmpty(txtMaKho.Text))
-            {
-                // Nếu người dùng không nhập mã kho, hệ thống sẽ tạo mới mã kho
-                txtMaKho.Text = GenerateMaKho();
-            }
+            // Lấy dữ liệu từ textbox
+            string maKho = txtMaKho.Text.Trim();
+            string maMon = txtMaMon.Text.Trim();
+            string tenMon = txtTenMon.Text.Trim();
 
-            string selectedMaKho = txtMaKho.Text; // Lấy mã kho từ TextBox
-
-            if (string.IsNullOrEmpty(txtMaMon.Text))
+            if (string.IsNullOrEmpty(maMon))
             {
                 MessageBox.Show("Vui lòng nhập Mã món.");
                 txtMaMon.Focus();
                 return;
             }
 
-            if (string.IsNullOrEmpty(txtTenMon.Text))
+            if (string.IsNullOrEmpty(tenMon))
             {
                 MessageBox.Show("Vui lòng nhập Tên món.");
                 txtTenMon.Focus();
@@ -156,6 +158,13 @@ namespace Nhom5_QuanLyBida
             if (!int.TryParse(txtSLXuat.Text, out int slXuat))
             {
                 MessageBox.Show("Số lượng xuất phải là số nguyên.");
+                return;
+            }
+
+            if (!decimal.TryParse(txt_DonGia.Text, out decimal donGia))
+            {
+                MessageBox.Show("Đơn giá không hợp lệ!");
+                txt_DonGia.Focus();
                 return;
             }
 
@@ -179,101 +188,102 @@ namespace Nhom5_QuanLyBida
                         SqlCommand insertMonCmd = new SqlCommand(insertMonQuery, conn);
                         insertMonCmd.Parameters.AddWithValue("@MaMon", txtMaMon.Text);
                         insertMonCmd.Parameters.AddWithValue("@TenMon", txtTenMon.Text);
-                        insertMonCmd.Parameters.AddWithValue("@DonGia", decimal.Parse(txtSLNhap.Text));  // Giả sử bạn muốn nhập giá vào textbox SLNhap (có thể điều chỉnh)
-                        insertMonCmd.Parameters.AddWithValue("@SoLuongTon", 0);  // Giả sử tồn kho ban đầu là 0
+                        insertMonCmd.Parameters.AddWithValue("@DonGia", donGia);
+                        insertMonCmd.Parameters.AddWithValue("@SoLuongTon", 0);
+                        // Giả sử bạn muốn nhập giá vào textbox SLNhap (có thể điều chỉnh)
+
+
                         insertMonCmd.ExecuteNonQuery();
                     }
 
-                    // Kiểm tra xem cặp MaKho và MaMon đã tồn tại chưa trong bảng Kho
-                    string checkQuery = @"
-                SELECT COUNT(*) 
-                FROM Kho 
-                WHERE MaKho = @MaKho AND MaMon = @MaMon";
+                    // Nếu thêm mới và chưa nhập mã kho, sinh tự động
+                    if (string.IsNullOrEmpty(maKho))
+                    {
+                        maKho = GenerateMaKho();
+                        txtMaKho.Text = maKho; // hiển thị lại
+                    }
 
+                    // Kiểm tra xem cặp MaKho + MaMon đã tồn tại chưa
+                    string checkQuery = "SELECT COUNT(*) FROM Kho WHERE MaKho=@MaKho AND MaMon=@MaMon";
                     SqlCommand checkCmd = new SqlCommand(checkQuery, conn);
-                    checkCmd.Parameters.AddWithValue("@MaKho", selectedMaKho);
-                    checkCmd.Parameters.AddWithValue("@MaMon", txtMaMon.Text);
-
+                    checkCmd.Parameters.AddWithValue("@MaKho", maKho);
+                    checkCmd.Parameters.AddWithValue("@MaMon", maMon);
                     int count = (int)checkCmd.ExecuteScalar();
 
-                    if (count > 0)
+                    bool isNew = count == 0; // true nếu thêm mới
+
+                    // Kiểm tra số lượng xuất
+                    if (slXuat < 0 || (!isNew && slXuat > slNhap))
                     {
-                        // Nếu cặp MaKho và MaMon đã tồn tại, cập nhật
-                        if (isEditing)
-                        {
-                            string updateQuery = @"
-                        UPDATE Kho
-                        SET SoLuongNhap = @SLNhap, SoLuongXuat = @SLXuat, NgayNhap = @NgayNhap
-                        WHERE MaKho = @MaKho AND MaMon = @MaMon";
-
-                            SqlCommand updateCmd = new SqlCommand(updateQuery, conn);
-                            updateCmd.Parameters.AddWithValue("@MaKho", selectedMaKho);
-                            updateCmd.Parameters.AddWithValue("@MaMon", txtMaMon.Text);
-                            updateCmd.Parameters.AddWithValue("@SLNhap", slNhap);
-                            updateCmd.Parameters.AddWithValue("@SLXuat", slXuat);
-                            updateCmd.Parameters.AddWithValue("@NgayNhap", dtNgayNhap.Value);
-
-                            updateCmd.ExecuteNonQuery();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Cặp mã kho và mã món đã tồn tại trong kho.");
-                            return;
-                        }
+                        MessageBox.Show("Số lượng xuất không hợp lệ!");
+                        return;
                     }
-                    else
+
+                    if (isNew)
                     {
-                        // Nếu cặp MaKho và MaMon chưa tồn tại, tiến hành thêm mới vào bảng Kho
+                        // Thêm mới vào Kho
                         string insertQuery = @"
                     INSERT INTO Kho (MaKho, MaMon, SoLuongNhap, SoLuongXuat, NgayNhap)
                     VALUES (@MaKho, @MaMon, @SLNhap, @SLXuat, @NgayNhap)";
-
                         SqlCommand insertCmd = new SqlCommand(insertQuery, conn);
-                        insertCmd.Parameters.AddWithValue("@MaKho", selectedMaKho);
-                        insertCmd.Parameters.AddWithValue("@MaMon", txtMaMon.Text);
+                        insertCmd.Parameters.AddWithValue("@MaKho", maKho);
+                        insertCmd.Parameters.AddWithValue("@MaMon", maMon);
                         insertCmd.Parameters.AddWithValue("@SLNhap", slNhap);
                         insertCmd.Parameters.AddWithValue("@SLXuat", slXuat);
                         insertCmd.Parameters.AddWithValue("@NgayNhap", dtNgayNhap.Value);
-
                         insertCmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Thêm mới vào kho thành công!");
+                    }
+                    else
+                    {
+                        // Cập nhật số lượng xuất + số lượng nhập nếu cần
+                        string updateQuery = @"
+                    UPDATE Kho
+                    SET SoLuongXuat = SoLuongXuat + @SLXuat,
+                        SoLuongNhap = @SLNhap,
+                        NgayNhap = @NgayNhap
+                    WHERE MaKho = @MaKho AND MaMon = @MaMon";
+                        SqlCommand updateCmd = new SqlCommand(updateQuery, conn);
+                        updateCmd.Parameters.AddWithValue("@MaKho", maKho);
+                        updateCmd.Parameters.AddWithValue("@MaMon", maMon);
+                        updateCmd.Parameters.AddWithValue("@SLNhap", slNhap);
+                        updateCmd.Parameters.AddWithValue("@SLXuat", slXuat);
+                        
+                        updateCmd.Parameters.AddWithValue("@NgayNhap", dtNgayNhap.Value);
+                        updateCmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Cập nhật số lượng xuất thành công!");
                     }
 
-                    // Cập nhật tên món nếu cần thiết
-                    string updateNameQuery = "UPDATE Mon SET TenMon = @TenMon WHERE MaMon = @MaMon";
+                    // Cập nhật tên món nếu cần
+                    string updateNameQuery = "UPDATE Mon SET TenMon=@TenMon,DonGia=@DonGia WHERE MaMon=@MaMon";
                     SqlCommand cmdName = new SqlCommand(updateNameQuery, conn);
-                    cmdName.Parameters.AddWithValue("@TenMon", txtTenMon.Text);
-                    cmdName.Parameters.AddWithValue("@MaMon", txtMaMon.Text);
+                    cmdName.Parameters.AddWithValue("@TenMon", tenMon);
+                    cmdName.Parameters.AddWithValue("@MaMon", maMon);
+                    cmdName.Parameters.AddWithValue("@DonGia",donGia);
                     cmdName.ExecuteNonQuery();
 
                     // Cập nhật tồn kho
-                    UpdateTonKho(txtMaMon.Text);
+                    UpdateTonKho(maMon);
 
                     // Load lại danh sách kho
                     LoadKho();
-
-                    MessageBox.Show("Đã lưu dữ liệu thành công.");
-                }
-            }
-            catch (SqlException sqlEx)
-            {
-                if (sqlEx.Number == 547) // Lỗi khóa ngoại (Foreign Key)
-                {
-                    MessageBox.Show("Mã món này không tồn tại trong danh sách Món! Vui lòng kiểm tra lại.");
-                }
-                else
-                {
-                    MessageBox.Show("Lỗi SQL: " + sqlEx.Message);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi lưu kho: " + ex.Message);
+                MessageBox.Show("Lỗi khi lưu dữ liệu: " + ex.Message);
             }
 
             // Reset trạng thái
             btn_Luu.Enabled = false;
             txtMaMon.Enabled = false;
             txtTenMon.Enabled = false;
+            txtSLXuat.Enabled = false;
+            dtNgayNhap.Enabled=false;
+            txtSLNhap.Enabled = false;
+            txt_DonGia.Enabled = false;
         }
 
 
@@ -285,9 +295,11 @@ namespace Nhom5_QuanLyBida
                 txtMaKho.Text = dgvKho.Rows[e.RowIndex].Cells["MaKho"].Value.ToString();
                 txtMaMon.Text = dgvKho.Rows[e.RowIndex].Cells["MaMon"].Value.ToString();
                 txtTenMon.Text = dgvKho.Rows[e.RowIndex].Cells["TenMon"].Value.ToString();
+                txt_DonGia.Text = dgvKho.Rows[e.RowIndex].Cells["DonGia"].Value.ToString();
                 dtNgayNhap.Value = Convert.ToDateTime(dgvKho.Rows[e.RowIndex].Cells["NgayNhap"].Value);
                 txtSLNhap.Text = dgvKho.Rows[e.RowIndex].Cells["SoLuongNhap"].Value.ToString();
                 txtSLXuat.Text = dgvKho.Rows[e.RowIndex].Cells["SoLuongXuat"].Value.ToString();
+                
             }
         }
 
@@ -308,6 +320,9 @@ namespace Nhom5_QuanLyBida
             txtTenMon.Enabled = false;
             txtSLNhap.Enabled = false;
             txtSLXuat.Enabled = false;
+            dtNgayNhap.Enabled = false;
+            txt_DonGia.Enabled = false;
+            txtMaKho.Enabled=false;
         }
 
 
@@ -354,7 +369,7 @@ namespace Nhom5_QuanLyBida
                     conn.Open();
                     // Query lấy cả Tên Món để hiển thị
                     string query = @"
-                        SELECT Kho.MaKho, Kho.MaMon, Mon.TenMon, 
+                        SELECT Kho.MaKho, Kho.MaMon, Mon.TenMon, Mon.DonGia,
                                Kho.NgayNhap, Kho.SoLuongNhap, Kho.SoLuongXuat
                         FROM Kho 
                         JOIN Mon ON Kho.MaMon = Mon.MaMon
@@ -420,6 +435,12 @@ namespace Nhom5_QuanLyBida
             {
                 MessageBox.Show("Lỗi cập nhật tồn kho: " + ex.Message);
             }
+        }
+
+        private void btn_Xuat_Click(object sender, EventArgs e)
+        {
+            btn_Luu.Enabled= true;
+            txtSLXuat.Enabled = true;
         }
     }
 }
