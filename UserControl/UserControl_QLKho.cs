@@ -154,10 +154,22 @@ namespace Nhom5_QuanLyBida
                 MessageBox.Show("Số lượng nhập phải là số nguyên.");
                 return;
             }
+            if (slNhap <= 0)
+            {
+                MessageBox.Show("Số lượng nhập phải lớn hơn 0!");
+                txtSLNhap.Focus();
+                return;
+            }
 
             if (!int.TryParse(txtSLXuat.Text, out int slXuat))
             {
                 MessageBox.Show("Số lượng xuất phải là số nguyên.");
+                return;
+            }
+            if (slXuat < 0)
+            {
+                MessageBox.Show("Số lượng xuất không được nhỏ hơn 0!");
+                txtSLXuat.Focus();
                 return;
             }
 
@@ -167,6 +179,26 @@ namespace Nhom5_QuanLyBida
                 txt_DonGia.Focus();
                 return;
             }
+
+            if (donGia <= 0)
+            {
+                MessageBox.Show("Đơn giá phải lớn hơn 0!");
+                txt_DonGia.Focus();
+                return;
+            }
+
+            if (dtNgayNhap.Value.Date > DateTime.Now.Date)
+            {
+                MessageBox.Show(
+                    "Ngày nhập phải nhỏ hơn ngày hiện tại!",
+                    "Ngày không hợp lệ",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                dtNgayNhap.Focus();
+                return;
+            }
+
 
             try
             {
@@ -181,6 +213,28 @@ namespace Nhom5_QuanLyBida
 
                     int maMonCount = (int)checkMaMonCmd.ExecuteScalar();
 
+                    string checkTenMonQuery = "SELECT TenMon FROM Mon WHERE MaMon = @MaMon";
+                    SqlCommand checkTenCmd = new SqlCommand(checkTenMonQuery, conn);
+                    checkTenCmd.Parameters.AddWithValue("@MaMon", maMon);
+                    object tenMonDb = checkTenCmd.ExecuteScalar();
+
+                    if (tenMonDb != null)
+                    {
+                        // Mã món đã tồn tại → so sánh tên
+                        string tenMonTrongDb = tenMonDb.ToString().Trim();
+
+                        if (!tenMonTrongDb.Equals(tenMon.Trim(), StringComparison.OrdinalIgnoreCase))
+                        {
+                            MessageBox.Show(
+                                $"Tên món không đúng!\nTên đúng trong hệ thống là: {tenMonTrongDb}",
+                                "Sai tên món",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error
+                            );
+                            txtTenMon.Focus();
+                            return;
+                        }
+                    }
                     // Nếu mã món chưa tồn tại, thêm vào bảng Mon
                     if (maMonCount == 0)
                     {
